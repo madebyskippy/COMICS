@@ -8,56 +8,62 @@ public class mvt_line : MonoBehaviour {
 
 	int[] meshtopoly = new int[]{3,1,2,0};
 
-	GameObject dragging;
 	string dragPosition;
+
+	bool isDragging;
+	bool[] vertPulling;
 
 	float lastMouse;
 
 	// Use this for initialization
 	void Start () {
-		dragging = null;
 		dragPosition = "null";
 		lastMouse = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown(0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction);
-			if (hit.transform != null){
-				if (hit.transform.tag == "gutter") {
-					dragging = hit.transform.gameObject;
-					dragPosition = hit.transform.name;
-					lastMouse = Input.mousePosition.x;
-				}
-			}
+		if (isDragging) {
+			float change = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - lastMouse;
+			lastMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+			nudgePoints (vertPulling, change);
 		}
-		if (Input.GetMouseButtonUp (0)) {
-			dragging = null;
-			dragPosition = "null";
-		}
+	}
 
-		if (dragging != null) {
-			bool[] pulling = new bool[4];
-			if (dragPosition == "top") {
-				pulling = new bool[]{ false, true, false, true };
-			} else if (dragPosition == "mid") {
-				pulling = new bool[]{ true, true, true, true };
-			} else if (dragPosition == "bottom") {
-				pulling = new bool[]{ true, false, true, false };
-			}
-			float change = Input.mousePosition.x - lastMouse;
-			lastMouse = Input.mousePosition.x;
-			nudgePoints (dragging, pulling, change);
+	void OnMouseDown(){
+		if (!isDragging) {
+			//determine position...
+			lastMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+			getClickPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+		}
+		isDragging = true;
+
+	}void OnMouseUp(){
+		isDragging = false;
+	}
+
+	void getClickPosition(Vector3 mouse){
+		Vector3 top = transform.TransformPoint (transform.GetComponent<MeshFilter> ().mesh.vertices [3]);
+		Vector3 bot = transform.TransformPoint (transform.GetComponent<MeshFilter> ().mesh.vertices [0]);
+		Debug.Log (Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y));
+		float placement = Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y);
+		if (placement < 0.25f) {
+			//top
+			vertPulling = new bool[]{ false, true, false, true };
+		} else if (placement < 0.75f) {
+			//mid
+			vertPulling = new bool[]{ true, true, true, true };
+		} else {
+			//bot
+			vertPulling = new bool[]{ true, false, true, false };
 		}
 	}
 
 	//quad mesh points, from 
-	void nudgePoints(GameObject d, bool[] p, float c){	//dragged game object and veriticies being pulled and amount to change them
-		Mesh m = d.transform.parent.GetComponent<MeshFilter> ().mesh;
+	void nudgePoints(bool[] p, float c){	//dragged game object and veriticies being pulled and amount to change them
+		Mesh m = transform.GetComponent<MeshFilter> ().mesh;
 		Vector3[] v = m.vertices;
-		PolygonCollider2D pc = d.GetComponent<PolygonCollider2D> ();
+		PolygonCollider2D pc = GetComponent<PolygonCollider2D> ();
 		Vector2[] pcv = pc.points;
 		for (int i = 0; i < v.Length; i++) {
 			if (p [i]) {
