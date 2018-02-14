@@ -17,17 +17,20 @@ public class mvt_line_alt : MonoBehaviour {
 
 	float lastMouse;
 
+    private float y;
+
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		dragPosition = "null";
 		lastMouse = 0f;
         gutter1 = FindObjectOfType<mvt_line>();
         gutter3 = FindObjectOfType<mvt_line_diag>();
+        y = transform.position.y;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (isDragging) {
+        if (isDragging) {
 			float change = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - lastMouse;
 			lastMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
 			nudgePoints (vertPulling, change);
@@ -56,28 +59,42 @@ public class mvt_line_alt : MonoBehaviour {
 		}
 	}
 
-	//quad mesh points, from 
-	void nudgePoints(bool[] p, float c){    //dragged game object and veriticies being pulled and amount to change them
+    //quad mesh points, from 
+    void nudgePoints(bool[] p, float c)
+    {    //dragged game object and veriticies being pulled and amount to change them
 
         float scaleY = gutter1.transform.localScale.y;
-        transform.position = new Vector3(transform.position.x, transform.position.y + c + transform.position.z);
+        y = Mathf.Clamp(transform.position.y + c, -4.76f, 4.75f);
+        transform.position = new Vector3(transform.position.x,
+                                         y,
+                                         transform.position.z);
+
+
+        if (y <= -4.76f || y >= 4.75f)//!(-4.76f <= y && y <= 4.75f))
+        {
+            return;
+        }
+
+
         gutter3.transform.position = new Vector3(gutter3.transform.position.x,
                                                  gutter3.transform.position.y + c,
                                                  gutter3.transform.position.z);
-        Mesh m = gutter1.GetComponent<MeshFilter> ().mesh;
-		Vector3[] v = m.vertices;
-		PolygonCollider2D pc = gutter1.GetComponent<PolygonCollider2D> ();
-		Vector2[] pcv = pc.points;
 
+        Mesh m = gutter1.GetComponent<MeshFilter>().mesh;
+        Vector3[] v = m.vertices;
+        PolygonCollider2D pc = gutter1.GetComponent<PolygonCollider2D>();
+        Vector2[] pcv = pc.points;
 
-        for (int i = 0; i < v.Length; i++) {
+        for (int i = 0; i < v.Length; i++)
+        {
             if (i == 0 || i == 2) //bottom two vertices
             {
-                v[i] = new Vector3(v[i].x, v[i].y + c/scaleY, v[i].z);
-                 pcv[meshtopoly[i]] = new Vector2(pcv[meshtopoly[i]].x, pcv[meshtopoly[i]].y + c/scaleY);
+                v[i] = new Vector3(v[i].x, v[i].y + c / scaleY, v[i].z);
+                pcv[meshtopoly[i]] = new Vector2(pcv[meshtopoly[i]].x, pcv[meshtopoly[i]].y + c / scaleY);
             }
-		}
-		m.vertices = v;
-		pc.points = pcv;
-	}
+        }
+        m.vertices = v;
+        pc.points = pcv;
+
+    }
 }
