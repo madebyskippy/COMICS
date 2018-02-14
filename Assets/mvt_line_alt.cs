@@ -20,7 +20,7 @@ public class mvt_line_alt : MonoBehaviour {
     private float y;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		dragPosition = "null";
 		lastMouse = 0f;
         gutter1 = FindObjectOfType<mvt_line>();

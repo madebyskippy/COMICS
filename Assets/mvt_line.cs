@@ -17,7 +17,7 @@ public class mvt_line : MonoBehaviour {
 	float lastMouse;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		dragPosition = "null";
 		lastMouse = 0f;
 	}

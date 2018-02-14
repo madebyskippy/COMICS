@@ -17,7 +17,7 @@ public class mvt_line_diag : MonoBehaviour {
 	float lastMouse;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		dragPosition = "null";
 		lastMouse = 0f;
         gutter2 = FindObjectOfType<mvt_line_alt>();
