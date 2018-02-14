@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class mvt_line_alt : MonoBehaviour {
 
-	//pretty loose coding since this is a prototype
+    //pretty loose coding since this is a prototype
 
+    private mvt_line gutter1;
 	int[] meshtopoly = new int[]{3,1,2,0};
 
 	string dragPosition;
@@ -19,6 +20,7 @@ public class mvt_line_alt : MonoBehaviour {
 	void Start () {
 		dragPosition = "null";
 		lastMouse = 0f;
+        gutter1 = FindObjectOfType<mvt_line>();
 	}
 	
 	// Update is called once per frame
@@ -53,20 +55,24 @@ public class mvt_line_alt : MonoBehaviour {
 	}
 
 	//quad mesh points, from 
-	void nudgePoints(bool[] p, float c){	//dragged game object and veriticies being pulled and amount to change them
-		Mesh m = transform.GetComponent<MeshFilter> ().mesh;
+	void nudgePoints(bool[] p, float c){    //dragged game object and veriticies being pulled and amount to change them
+
+        float scaleY = gutter1.transform.localScale.y;
+        transform.position = new Vector3(transform.position.x, transform.position.y + c + transform.position.z);
+        Mesh m = gutter1.GetComponent<MeshFilter> ().mesh;
 		Vector3[] v = m.vertices;
-		PolygonCollider2D pc = GetComponent<PolygonCollider2D> ();
+		PolygonCollider2D pc = gutter1.GetComponent<PolygonCollider2D> ();
 		Vector2[] pcv = pc.points;
-        /*for (int i = 0; i < v.Length; i++) {
-			if (p [i]) {
-				//move it!!
-				v[i] = new Vector3(v[i].x, v[i].y+c,v[i].z);
-				pcv [meshtopoly [i]] = new Vector2 (pcv[meshtopoly[i]].x,pcv[meshtopoly[i]].y+c);
-			}
+
+
+        for (int i = 0; i < v.Length; i++) {
+            if (i == 0 || i == 2) //bottom two vertices
+            {
+                v[i] = new Vector3(v[i].x, v[i].y + c/scaleY, v[i].z);
+                 pcv[meshtopoly[i]] = new Vector2(pcv[meshtopoly[i]].x, pcv[meshtopoly[i]].y + c/scaleY);
+            }
 		}
 		m.vertices = v;
-		pc.points = pcv;*/
-        transform.position = new Vector3(transform.position.x, transform.position.y + c + transform.position.z);
+		pc.points = pcv;
 	}
 }
