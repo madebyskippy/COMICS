@@ -19,6 +19,9 @@ public class mvt_line_alt : MonoBehaviour {
 
     private float y;
 
+	bool isUp;
+	bool isDown;
+
 	// Use this for initialization
 	void Awake () {
 		dragPosition = "null";
@@ -70,7 +73,10 @@ public class mvt_line_alt : MonoBehaviour {
                                          transform.position.z);
 
 
-        if (y <= -4.76f || y >= 4.75f)//!(-4.76f <= y && y <= 4.75f))
+		isUp = (y >= 4.75);
+		isDown = (y <= -4.76);
+
+        if (isDown || isUp)//!(-4.76f <= y && y <= 4.75f))
         {
             return;
         }
@@ -97,4 +103,12 @@ public class mvt_line_alt : MonoBehaviour {
         pc.points = pcv;
 
     }
+
+	public bool getUp(){
+		return isUp;
+	}
+
+	public bool getDown(){
+		return isDown;
+	}
 }

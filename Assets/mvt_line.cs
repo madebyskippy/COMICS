@@ -11,15 +11,29 @@ public class mvt_line : MonoBehaviour {
 
 	string dragPosition;
 
+	float gutterwidth;
+	Mesh guttermesh;
+	PolygonCollider2D guttercollider;
+
 	bool isDragging;
 	bool[] vertPulling;
 
 	float lastMouse;
 
+	bool isMaxAngle;
+	bool isOnScreen;
+
 	// Use this for initialization
 	void Awake () {
 		dragPosition = "null";
 		lastMouse = 0f;
+		isMaxAngle = false;
+		isOnScreen = true;
+		guttermesh = transform.GetComponent<MeshFilter> ().mesh;
+		guttercollider = GetComponent<PolygonCollider2D> ();
+
+		Vector3[] v = guttermesh.vertices;
+		gutterwidth = v [2].x - v [0].x;
 	}
 	
 	// Update is called once per frame
@@ -46,7 +60,7 @@ public class mvt_line : MonoBehaviour {
 	void getClickPosition(Vector3 mouse){
 		Vector3 top = transform.TransformPoint (transform.GetComponent<MeshFilter> ().mesh.vertices [3]);
 		Vector3 bot = transform.TransformPoint (transform.GetComponent<MeshFilter> ().mesh.vertices [0]);
-		Debug.Log (Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y));
+//		Debug.Log (Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y));
 		float placement = Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y);
 		if (placement < 0.25f) {
 			//top
@@ -65,28 +79,59 @@ public class mvt_line : MonoBehaviour {
 
 	//quad mesh points, from 
 	void nudgePoints(bool[] p, float c){	//dragged game object and veriticies being pulled and amount to change them
-		Mesh m = transform.GetComponent<MeshFilter> ().mesh;
-		Vector3[] v = m.vertices;
-		PolygonCollider2D pc = GetComponent<PolygonCollider2D> ();
-		Vector2[] pcv = pc.points;
+		Vector3[] v = guttermesh.vertices;
+		Vector2[] pcv = guttercollider.points;
 
 		//check bounds
 		float xbot = v[0].x + c * Convert.ToInt32(p[0]); //bottom left
 		float xtop = v [3].x + c * Convert.ToInt32 (p [3]); //top left
 		float height = v[3].y-v[0].y;
 		float width = Mathf.Abs(xtop - xbot);
-		if (width > height * Mathf.Tan(Mathf.Deg2Rad*70f)){
-			return;
+
+		if (p [0] && !p [3]) {
+			//moving the bottom and not the top
+
+		} else if (!p [0] && p [3]) {
+			//moving the top and not the bottom
 		}
 
-		for (int i = 0; i < v.Length; i++) {
-			if (p [i]) {
-				//move it!!
-				v[i] = new Vector3(v[i].x+c, v[i].y,v[i].z);
-				pcv [meshtopoly [i]] = new Vector2 (pcv[meshtopoly[i]].x+c,pcv[meshtopoly[i]].y);
-			}
+		if (width >= height * Mathf.Tan (Mathf.Deg2Rad * 70f)) {
+			isMaxAngle = true;
+			return;
+		} else {
+			isMaxAngle = false;
 		}
-		m.vertices = v;
-		pc.points = pcv;
+
+		xbot = Mathf.Clamp (xbot, -6.4f, 5.2f);
+		xtop = Mathf.Clamp (xtop, -6.4f, 5.2f);
+		if ((xbot <= -6.4f || xtop <= -6.4f) || (xbot >= 5.2f || xtop >= 5.2f)) {
+			isOnScreen = false;
+		} else {
+			isOnScreen = true;
+		}
+
+		//move it!!
+		v[0] = new Vector3(xbot, v[0].y,v[0].z);
+		pcv [meshtopoly [0]] = new Vector2 (xbot,pcv[meshtopoly[0]].y);
+
+		v[1] = new Vector3(xtop+gutterwidth, v[1].y,v[1].z);
+		pcv [meshtopoly [1]] = new Vector2 (xtop+gutterwidth,pcv[meshtopoly[1]].y);
+
+		v[2] = new Vector3(xbot+gutterwidth, v[2].y,v[2].z);
+		pcv [meshtopoly [2]] = new Vector2 (xbot+gutterwidth,pcv[meshtopoly[2]].y);
+
+		v[3] = new Vector3(xtop, v[3].y,v[3].z);
+		pcv [meshtopoly [3]] = new Vector2 (xtop,pcv[meshtopoly[3]].y);
+
+		guttermesh.vertices = v;
+		guttercollider.points = pcv;
+	}
+
+	public bool getOnScreen(){
+		return isOnScreen;
+	}
+
+	public bool getMaxAngle(){
+		return isMaxAngle;
 	}
 }

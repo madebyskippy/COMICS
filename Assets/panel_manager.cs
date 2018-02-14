@@ -14,11 +14,33 @@ public class panel_manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		heart.SetActive (false);
+		tension.SetActive (false);
+		cornerPanel.SetActive (false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		//if gutter 1 gone AND gutter 2 gone down, tension appears
+		if (!gutter1.getOnScreen () && gutter2.getDown ()) {
+			tension.SetActive (true);
+		} else {
+			tension.SetActive (false);
+		}
+
+		//if gutter 1 gone and gutter 2 still there, <3 appear
+		if (!gutter1.getOnScreen () && !gutter2.getUp () && !gutter2.getDown()) {
+			heart.SetActive (true);
+		} else {
+			heart.SetActive (false);
+		}
+
+		//if gutter 1 at max angle and gutter 2 not up, 3rd panel appear
+		if (gutter1.getMaxAngle () && !gutter2.getUp ()) {
+			cornerPanel.SetActive (true);
+		} else {
+			cornerPanel.SetActive (false);
+		}
 	}
 }
