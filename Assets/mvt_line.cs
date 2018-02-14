@@ -89,18 +89,18 @@ public class mvt_line : MonoBehaviour {
 		float width = Mathf.Abs(xtop - xbot);
 
 		float limit = height * Mathf.Tan (Mathf.Deg2Rad * 70f);
-		if (width >= limit) {
+		if (width >= (limit*0.99f)) { //to give it a little wiggle room because otherwise it was erroring
 			isMaxAngle = (xtop > xbot); // only true if it's slanted to the right
 			if (p [0] && !p [3]) {
 				//moving the bottom and not the top
 				//clamp vert 0 to height*tan(70) from the top x
-				xbot = xtop + limit * (Convert.ToInt32(xtop<xbot)*2-1); //1 or -1 depending on if it was greater or less
-				Debug.Log("moving bot");
+				xbot = xtop + limit * (Convert.ToInt32 (xtop < xbot) * 2 - 1); //1 or -1 depending on if it was greater or less
+				Debug.Log ("moving bot");
 			} else if (!p [0] && p [3]) {
 				//moving the top and not the bottom
 				//clamp vert 3
-				xtop = xbot + limit * (Convert.ToInt32(xtop>xbot)*2-1); //1 or -1 depending on if it was greater or less
-				Debug.Log("moving top");
+				xtop = xbot + limit * (Convert.ToInt32 (xtop > xbot) * 2 - 1); //1 or -1 depending on if it was greater or less
+				Debug.Log ("moving top");
 			}
 		} else {
 			isMaxAngle = false;
