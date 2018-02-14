@@ -56,9 +56,11 @@ public class mvt_line_diag : MonoBehaviour {
 
 	//quad mesh points, from 
 	void nudgePoints(bool[] p, float c){    //dragged game object and veriticies being pulled and amount to change them
-        transform.position = new Vector3(transform.position.x+c, transform.position.y + transform.position.z);
-        gutter2.transform.GetChild(0).position = new Vector3(gutter2.transform.GetChild(0).position.x+c,
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x+c,-4.5f,-0.9f), transform.position.y,transform.position.z);
+        float x = Mathf.Clamp(gutter2.transform.GetChild(0).position.x + c, -2.3f, 0);
+        gutter2.transform.GetChild(0).position = new Vector3(x,
                                                              gutter2.transform.GetChild(0).position.y,
                                                              gutter2.transform.GetChild(0).position.z);
+        Debug.Log(x);
 	}
 }
