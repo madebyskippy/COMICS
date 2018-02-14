@@ -7,6 +7,7 @@ public class mvt_line_alt : MonoBehaviour {
     //pretty loose coding since this is a prototype
 
     private mvt_line gutter1;
+    private mvt_line_diag gutter3;
 	int[] meshtopoly = new int[]{3,1,2,0};
 
 	string dragPosition;
@@ -21,6 +22,7 @@ public class mvt_line_alt : MonoBehaviour {
 		dragPosition = "null";
 		lastMouse = 0f;
         gutter1 = FindObjectOfType<mvt_line>();
+        gutter3 = FindObjectOfType<mvt_line_diag>();
 	}
 	
 	// Update is called once per frame
@@ -59,6 +61,9 @@ public class mvt_line_alt : MonoBehaviour {
 
         float scaleY = gutter1.transform.localScale.y;
         transform.position = new Vector3(transform.position.x, transform.position.y + c + transform.position.z);
+        gutter3.transform.position = new Vector3(gutter3.transform.position.x,
+                                                 gutter3.transform.position.y + c,
+                                                 gutter3.transform.position.z);
         Mesh m = gutter1.GetComponent<MeshFilter> ().mesh;
 		Vector3[] v = m.vertices;
 		PolygonCollider2D pc = gutter1.GetComponent<PolygonCollider2D> ();
