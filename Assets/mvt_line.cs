@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class mvt_line : MonoBehaviour {
 
 	//pretty loose coding since this is a prototype
 
-	int[] meshtopoly = new int[]{3,1,2,0};
+	int[] meshtopoly = new int[]{3,1,2,0}; //poly order is top left, top right, bot right, bot left... mesh order is weird
 
 	string dragPosition;
 
@@ -50,12 +51,15 @@ public class mvt_line : MonoBehaviour {
 		if (placement < 0.25f) {
 			//top
 			vertPulling = new bool[]{ false, true, false, true };
+			dragPosition = "top";
 		} else if (placement < 0.75f) {
 			//mid
 			vertPulling = new bool[]{ true, true, true, true };
+			dragPosition = "mid";
 		} else {
 			//bot
 			vertPulling = new bool[]{ true, false, true, false };
+			dragPosition = "bottom";
 		}
 	}
 
@@ -65,6 +69,16 @@ public class mvt_line : MonoBehaviour {
 		Vector3[] v = m.vertices;
 		PolygonCollider2D pc = GetComponent<PolygonCollider2D> ();
 		Vector2[] pcv = pc.points;
+
+		//check bounds
+		float xbot = v[0].x + c * Convert.ToInt32(p[0]); //bottom left
+		float xtop = v [3].x + c * Convert.ToInt32 (p [3]); //top left
+		float height = v[3].y-v[0].y;
+		float width = Mathf.Abs(xtop - xbot);
+		if (width > height * Mathf.Tan(Mathf.Deg2Rad*70f)){
+			return;
+		}
+
 		for (int i = 0; i < v.Length; i++) {
 			if (p [i]) {
 				//move it!!
