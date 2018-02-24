@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4665435855733120}
   - component: {fileID: 120608825371893608}
   m_Layer: 0
-  m_Name: panel
+  m_Name: panel line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ LineRenderer:
   - {x: 1, y: -1, z: 0}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.1
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
