@@ -13,6 +13,7 @@ public class panelmaker : MonoBehaviour {
 	[SerializeField] Material red;
 	[SerializeField] Material black;
 
+	[SerializeField] Sprite basePanel;
 	[SerializeField] Sprite[] group1;
 	[SerializeField] Sprite[] group2;
 	[SerializeField] Sprite[] group3;
@@ -38,6 +39,8 @@ public class panelmaker : MonoBehaviour {
 
 	List<RectTransform> masks;
 	List<LineRenderer> lines;
+
+	List<int> lastMade = new List<int>();
 
 	Image[] panelContent = new Image[5];
 
@@ -89,6 +92,13 @@ public class panelmaker : MonoBehaviour {
 					LineRenderer tempLine = lines [lines.Count - 1];
 					lines.RemoveAt (lines.Count - 1);
 					Destroy (tempLine.gameObject);
+
+					int lm = lastMade [lastMade.Count - 1];
+					panelstate [lm] [0] = false;
+					if (lm == 0) {
+						panelstate [0] [1] = false;
+					}
+					lastMade.RemoveAt (lastMade.Count - 1);
 				}
 			}
 		}
@@ -112,13 +122,11 @@ public class panelmaker : MonoBehaviour {
 				currentPanelMask.position = pos;
 				currentGroup = Group.None;
 				if (g != -1) {
-					Sprite s = null;
+					Sprite s = basePanel;
 					currentGroup = (Group)g;
 					s = getSprite (g);
-					if (s != null) {
-						panelContent [g] = currentPanelMask.GetChild (0).GetComponent<Image> ();
-						panelContent [g].sprite = s;
-					}
+					panelContent [g] = currentPanelMask.GetChild (0).GetComponent<Image> ();
+					panelContent [g].sprite = s;
 				}
 				currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = -1 * currentPanelMask.anchoredPosition;
 				currentPanelLine = Instantiate (panel, topleft, Quaternion.identity);
@@ -139,6 +147,7 @@ public class panelmaker : MonoBehaviour {
 					lastPanelMask = currentPanelMask;
 					masks.Add (currentPanelMask);
 					lines.Add (currentPanelLine);
+					lastMade.Add ((int)currentGroup);
 				}
 				currentPanelMask = null;
 				currentPanelLine = null;
@@ -150,7 +159,6 @@ public class panelmaker : MonoBehaviour {
 			if (panelContent [i] != null) {
 				Sprite s = getSprite (i);
 				panelContent [i].sprite = s;
-				panelstate [i] [0] = true;
 			} else {
 				panelstate [i] [0] = false;
 			}
@@ -217,7 +225,7 @@ public class panelmaker : MonoBehaviour {
 	}
 
 	Sprite getSprite(int g){
-		Sprite s = null;
+		Sprite s = basePanel;
 		switch (g) {
 		case 0:
 			//if you hit the phone or not
@@ -234,10 +242,10 @@ public class panelmaker : MonoBehaviour {
 			if (panelstate [(int)Group.bed] [0]) {
 				if (panelstate [(int)Group.bed] [1]) {
 					//have phone
-					s = grouppanels[Group.clothes][1];
+					s = grouppanels [Group.clothes] [1];
 				} else {
 					//no phone
-					s = grouppanels[Group.clothes][0];
+					s = grouppanels [Group.clothes] [0];
 				}
 				panelstate [(int)Group.clothes] [0] = true;
 			}
@@ -280,9 +288,6 @@ public class panelmaker : MonoBehaviour {
 						s = grouppanels [Group.chair] [0];
 					}
 					panelstate [(int)Group.chair] [0] = true;
-				} else {
-					//no phone
-					s = null;
 				}
 			}
 			break;
