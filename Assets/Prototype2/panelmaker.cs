@@ -149,7 +149,9 @@ public class panelmaker : MonoBehaviour {
 			if (panelContent [i] != null) {
 				Sprite s = getSprite (i);
 				panelContent [i].sprite = s;
-				panelstate [i][0] = true;
+				panelstate [i] [0] = true;
+			} else {
+				panelstate [i] [0] = false;
 			}
 		}
 

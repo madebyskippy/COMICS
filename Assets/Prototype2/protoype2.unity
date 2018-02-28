@@ -169,7 +169,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 28
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -180,8 +180,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: click & drag to draw a panel  //  page will show a total of 4 panels  //  press
-    Z to delete last panel created  //  R to restart
+  m_Text: click & drag to draw a panel  //  page will show a total of 5 panels  //  press
+    Z to undo  //  R to restart
 --- !u!222 &137773767
 CanvasRenderer:
   m_ObjectHideFlags: 0
