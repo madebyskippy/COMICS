@@ -174,18 +174,33 @@ public class panelmaker : MonoBehaviour {
 			currentPanelMask.SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, width);
 			currentPanelMask.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height);
 
-			if (Mathf.Abs (currentPanelLine.GetPosition (0).x - currentPanelLine.GetPosition (2).x) < 0.75f ||
-			    Mathf.Abs (currentPanelLine.GetPosition (0).y - currentPanelLine.GetPosition (2).y) < 0.75f) {
+//			if (Mathf.Abs (currentPanelLine.GetPosition (0).x - currentPanelLine.GetPosition (2).x) < 0.75f ||
+//			    Mathf.Abs (currentPanelLine.GetPosition (0).y - currentPanelLine.GetPosition (2).y) < 0.75f) {
+//				currentPanelLine.material = red;
+//				isValid = false;
+//			}else if (	Mathf.Abs (currentPanelLine.GetPosition (0).x - currentPanelLine.GetPosition (2).x) > 5f ||
+//				Mathf.Abs (currentPanelLine.GetPosition (0).y - currentPanelLine.GetPosition (2).y) > 5f){
+//				currentPanelLine.material = red;
+//				isValid = false;
+//			}else{
+//				currentPanelLine.material = black;
+//				isValid = true;
+//			}
+			if (currentPanelMask.rect.width < 50f ||
+			    currentPanelMask.rect.height < 50f) {
+				//too small
 				currentPanelLine.material = red;
 				isValid = false;
-			}else if (	Mathf.Abs (currentPanelLine.GetPosition (0).x - currentPanelLine.GetPosition (2).x) > 5f ||
-				Mathf.Abs (currentPanelLine.GetPosition (0).y - currentPanelLine.GetPosition (2).y) > 5f){
+			} else if (currentPanelMask.rect.width > maxSizes [(int)currentGroup].x ||
+			          currentPanelMask.rect.height > maxSizes [(int)currentGroup].y) {
+				//too big
 				currentPanelLine.material = red;
 				isValid = false;
-			}else{
+			} else {
 				currentPanelLine.material = black;
 				isValid = true;
 			}
+
 
 
 			if (currentGroup == Group.bed) {
