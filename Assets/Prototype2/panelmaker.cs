@@ -25,6 +25,8 @@ public class panelmaker : MonoBehaviour {
 
 	[SerializeField] panelswitcher[] switcher;
 
+	[SerializeField] Vector2[] maxSizes;
+
 	Group currentGroup;
 	LineRenderer currentPanelLine;
 	RectTransform currentPanelMask;
