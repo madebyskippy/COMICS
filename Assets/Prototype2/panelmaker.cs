@@ -110,6 +110,7 @@ public class panelmaker : MonoBehaviour {
 				topleft = pos;
 				currentPanelMask = Instantiate(mask, canvas.transform);
 				currentPanelMask.position = pos;
+				currentGroup = Group.None;
 				if (g != -1) {
 					Sprite s = null;
 					currentGroup = (Group)g;
@@ -174,18 +175,6 @@ public class panelmaker : MonoBehaviour {
 			currentPanelMask.SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, width);
 			currentPanelMask.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height);
 
-//			if (Mathf.Abs (currentPanelLine.GetPosition (0).x - currentPanelLine.GetPosition (2).x) < 0.75f ||
-//			    Mathf.Abs (currentPanelLine.GetPosition (0).y - currentPanelLine.GetPosition (2).y) < 0.75f) {
-//				currentPanelLine.material = red;
-//				isValid = false;
-//			}else if (	Mathf.Abs (currentPanelLine.GetPosition (0).x - currentPanelLine.GetPosition (2).x) > 5f ||
-//				Mathf.Abs (currentPanelLine.GetPosition (0).y - currentPanelLine.GetPosition (2).y) > 5f){
-//				currentPanelLine.material = red;
-//				isValid = false;
-//			}else{
-//				currentPanelLine.material = black;
-//				isValid = true;
-//			}
 			if (currentPanelMask.rect.width < 50f ||
 			    currentPanelMask.rect.height < 50f) {
 				//too small

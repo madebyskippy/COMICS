@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Group {bed, clothes, piano, chair, door, phone};
+public enum Group {bed, clothes, piano, chair, door, phone, None};
 
 public class panelswitcher : MonoBehaviour {
 

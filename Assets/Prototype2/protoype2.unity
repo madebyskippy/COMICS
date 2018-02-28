@@ -832,6 +832,8 @@ MonoBehaviour:
   - {x: 240, y: 430}
   - {x: 320, y: 570}
   - {x: 225, y: 900}
+  - {x: 400, y: 400}
+  - {x: 400, y: 400}
 --- !u!4 &1507812103
 Transform:
   m_ObjectHideFlags: 0
