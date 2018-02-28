@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class panelmaker : MonoBehaviour {
@@ -14,7 +15,17 @@ public class panelmaker : MonoBehaviour {
 
 	[SerializeField] Sprite[] group1;
 	[SerializeField] Sprite[] group2;
+	[SerializeField] Sprite[] group3;
+	[SerializeField] Sprite[] group4;
+	[SerializeField] Sprite[] group5;
 
+	bool[][] panelstate = new bool[5][];
+
+	Dictionary<Group, Sprite[]> grouppanels;
+
+	[SerializeField] panelswitcher[] switcher;
+
+	Group currentGroup;
 	LineRenderer currentPanelLine;
 	RectTransform currentPanelMask;
 	LineRenderer lastPanelLine;
@@ -24,6 +35,11 @@ public class panelmaker : MonoBehaviour {
 	bool isValid;
 
 	List<RectTransform> masks;
+	List<LineRenderer> lines;
+
+	Image[] panelContent = new Image[5];
+
+	bool hasPhone;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +48,28 @@ public class panelmaker : MonoBehaviour {
 		topleft = Vector3.zero;
 		isValid = false;
 		masks = new List<RectTransform> ();
+		lines = new List<LineRenderer> ();
+
+		grouppanels = new Dictionary<Group,Sprite[]> ();
+		grouppanels.Add (Group.bed, group1);
+		grouppanels.Add (Group.clothes, group2);
+		grouppanels.Add (Group.piano, group3);
+		grouppanels.Add (Group.chair, group4);
+		grouppanels.Add (Group.door, group5);
+
+		panelstate [(int)Group.bed] = new bool[2];
+		panelstate [(int)Group.bed] [0] = false; // not out of bed
+		panelstate [(int)Group.bed] [1] = false; // no phone
+		panelstate [(int)Group.clothes] = new bool[1]; 
+		panelstate [(int)Group.clothes] [0] = false; // not wearing clothes
+		panelstate [(int)Group.piano] = new bool[1]; 
+		panelstate [(int)Group.piano] [0] = false; // not listening to music
+		panelstate [(int)Group.chair] = new bool[1]; 
+		panelstate [(int)Group.chair] [0] = false; // not rushed for time
+		panelstate [(int)Group.door] = new bool[1]; 
+		panelstate [(int)Group.door] [0] = false; // not rushed for time
+
+		hasPhone = false;
 	}
 	
 	// Update is called once per frame
@@ -42,29 +80,44 @@ public class panelmaker : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Z)) {
 			//delete last panel
 			if (currentPanelLine == null) {
-				//you're not currently making a panel
-				Destroy (lastPanelLine.gameObject);
-				Destroy (lastPanelMask.gameObject);
-				lastPanelLine = null;
-				lastPanelMask = null;
-				masks.RemoveAt (masks.Count-1);
+				if (masks.Count > 0) {
+					RectTransform temp = masks [masks.Count - 1];
+					masks.RemoveAt (masks.Count - 1);
+					Destroy (temp.gameObject);
+					LineRenderer tempLine = lines [lines.Count - 1];
+					lines.RemoveAt (lines.Count - 1);
+					Destroy (tempLine.gameObject);
+				}
 			}
 		}
 
 		//start drawing panel
 		if (Input.GetMouseButtonDown (0)) {
-			if (masks.Count < 4) {
+			if (masks.Count < 5) {
+				bool isInPanel = false;
+				int g = -1;	
+				for (int i = 0; i < 5; i++) {
+					if (switcher [i].isIn) {
+						isInPanel= true;
+						g = i;
+						break;
+					}
+				}
 				Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 				pos.z = 0f;
 				topleft = pos;
-				/*
-				 *put stuff here to determine which group & panel to unmask
-				 *for group: check pos.x and pos.y within certain range
-				 *for panel: check some booleans or something like that :-P
-				 *temporary for now i'm just doing the first one in group 1
-				 */
 				currentPanelMask = Instantiate(mask, canvas.transform);
-				currentPanelMask.position = pos;//new Vector3 (Input.mousePosition.x,Input.mousePosition.y, 0f);
+				currentPanelMask.position = pos;
+				if (g != -1) {
+					Sprite s = null;
+					currentGroup = (Group)g;
+					s = getSprite (g);
+					if (s != null) {
+						panelContent [g] = currentPanelMask.GetChild (0).GetComponent<Image> ();
+						panelContent [g].sprite = s;
+					}
+				}
+				currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = -1 * currentPanelMask.anchoredPosition;
 				currentPanelLine = Instantiate (panel, topleft, Quaternion.identity);
 				currentPanelLine.SetPositions (new Vector3[] { topleft, topleft, topleft, topleft });
 				isValid = false;
@@ -75,23 +128,26 @@ public class panelmaker : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 			if (currentPanelLine != null) {
 				if (!isValid) {
-					Debug.Log ("it's red.");
 					Destroy (currentPanelLine.gameObject);
 					Destroy (currentPanelMask.gameObject);
 				} else {
 					//panel was created!! woo hoo
 					lastPanelLine = currentPanelLine;
 					lastPanelMask = currentPanelMask;
-
-					float r1x = currentPanelMask.anchoredPosition.x;
-					float r1y = currentPanelMask.anchoredPosition.y;
-					float r1w = (currentPanelMask.offsetMax - currentPanelMask.anchoredPosition).x;
-					float r1h = -1*(currentPanelMask.offsetMin - currentPanelMask.anchoredPosition).y;
-					Debug.Log (r1x+","+r1y+", "+r1w+","+r1h);
 					masks.Add (currentPanelMask);
+					lines.Add (currentPanelLine);
 				}
 				currentPanelMask = null;
 				currentPanelLine = null;
+			}
+		}
+
+		for (int i = 0; i < 5; i++) {
+			//check & refresh state
+			if (panelContent [i] != null) {
+				Sprite s = getSprite (i);
+				panelContent [i].sprite = s;
+				panelstate [i][0] = true;
 			}
 		}
 
@@ -127,6 +183,20 @@ public class panelmaker : MonoBehaviour {
 				isValid = true;
 			}
 
+
+			if (currentGroup == Group.bed) {
+				if (switcher [5].isIn) {
+					//u touched the phone
+					panelstate [(int)Group.bed] [1] = true;
+					currentPanelMask.GetChild (0).GetComponent<Image> ().sprite = grouppanels [Group.bed] [1];
+					hasPhone = true;
+				} else {
+					panelstate [(int)Group.bed] [1] = false;
+					currentPanelMask.GetChild (0).GetComponent<Image> ().sprite = grouppanels [Group.bed] [0];
+					hasPhone = false;
+				}
+			}
+
 			for (int i = 0; i < masks.Count; i++) {
 				if (isRectOverlap (currentPanelMask, masks [i])) {
 					//they're overlapping )-:
@@ -136,6 +206,102 @@ public class panelmaker : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	Sprite getSprite(int g){
+		Sprite s = null;
+		switch (g) {
+		case 0:
+			//if you hit the phone or not
+			//ur awake
+			s = grouppanels [Group.bed] [0];
+			panelstate [(int)Group.bed] [0] = true; //ur awake
+			if (hasPhone) {
+				s = grouppanels [Group.bed] [1];
+			}
+			panelstate [(int)Group.bed] [1] = hasPhone;
+			break;
+		case 1:
+			//if you're awake
+			if (panelstate [(int)Group.bed] [0]) {
+				if (panelstate [(int)Group.bed] [1]) {
+					//have phone
+					s = grouppanels[Group.clothes][1];
+				} else {
+					//no phone
+					s = grouppanels[Group.clothes][0];
+				}
+				panelstate [(int)Group.clothes] [0] = true;
+			}
+			break;
+		case 2:
+			if (panelstate [(int)Group.bed] [0]) {
+				if (panelstate [(int)Group.bed] [1] && panelstate[(int)Group.clothes][0]) {
+					//have phone
+					s = grouppanels[Group.piano][3];
+				}
+				if (panelstate [(int)Group.bed] [1] && !panelstate[(int)Group.clothes][0]) {
+					//have phone
+					s = grouppanels[Group.piano][2];
+				} 
+				if (!panelstate [(int)Group.bed] [1] && panelstate[(int)Group.clothes][0]) {
+					//have phone
+					s = grouppanels[Group.piano][1];
+				} 
+				if (!panelstate [(int)Group.bed] [1] && !panelstate[(int)Group.clothes][0]) {
+					//have phone
+					s = grouppanels[Group.piano][0];
+				} 
+				panelstate [(int)Group.piano] [0] = true;
+			}
+			break;
+		case 3:
+			if (panelstate [(int)Group.bed] [0]) {
+				if (panelstate [(int)Group.bed] [1]) {
+					//have phone
+					if (panelstate [(int)Group.clothes] [0] && panelstate[(int)Group.piano][0]) {
+						s = grouppanels [Group.chair] [2];
+					}
+					if (panelstate [(int)Group.clothes] [0] && !panelstate[(int)Group.piano][0]) {
+						s = grouppanels [Group.chair] [1];
+					}
+					if (!panelstate [(int)Group.clothes] [0] && panelstate[(int)Group.piano][0]) {
+						s = grouppanels [Group.chair] [3];
+					}
+					if (!panelstate [(int)Group.clothes] [0] && !panelstate[(int)Group.piano][0]) {
+						s = grouppanels [Group.chair] [0];
+					}
+					panelstate [(int)Group.chair] [0] = true;
+				} else {
+					//no phone
+					s = null;
+				}
+			}
+			break;
+		case 4:
+			if (panelstate [(int)Group.bed] [0]) {
+				if (!panelstate [(int)Group.clothes] [0] && !panelstate[(int)Group.bed][1] && !panelstate[(int)Group.chair][0]) {
+					s = grouppanels [Group.door] [0];
+				}
+				if (panelstate [(int)Group.clothes] [0] && !panelstate[(int)Group.bed][1] && !panelstate[(int)Group.chair][0]) {
+					s = grouppanels [Group.door] [1];
+				}
+				if (!panelstate [(int)Group.clothes] [0] && panelstate[(int)Group.bed][1] && !panelstate[(int)Group.chair][0]) {
+					s = grouppanels [Group.door] [2];
+				}
+				if (!panelstate [(int)Group.clothes] [0] && panelstate[(int)Group.bed][1] && panelstate[(int)Group.chair][0]) {
+					s = grouppanels [Group.door] [3];
+				}
+				if (panelstate [(int)Group.clothes] [0] && panelstate[(int)Group.bed][1] && !panelstate[(int)Group.chair][0]) {
+					s = grouppanels [Group.door] [4];
+				}
+				if (panelstate [(int)Group.clothes] [0] && panelstate[(int)Group.bed][1] && panelstate[(int)Group.chair][0]) {
+					s = grouppanels [Group.door] [5];
+				}
+			}
+			break;
+		}
+		return s;
 	}
 
 	//from http://jeffreythompson.org/collision-detection/rect-rect.php
