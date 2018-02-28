@@ -6,6 +6,8 @@ TagManager:
   tags:
   - gutter
   - sub
+  - draggable
+  - target
   layers:
   - Default
   - TransparentFX
