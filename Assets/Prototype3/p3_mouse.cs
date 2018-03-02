@@ -10,10 +10,22 @@ public class p3_mouse : MonoBehaviour {
 	Vector3 dragStart;
 	GameObject currentDrag;
 
+	List<GameObject> row1 = new List<GameObject>();
+	List<GameObject> row2 = new List<GameObject>();
+
+	float rowWidth;
+	float rowX;
+
 	// Use this for initialization
 	void Start () {
 		currentDrag = null;
 		dragStart = Vector3.zero;
+
+		row1.Add (GameObject.Find ("panel1"));
+		row2.Add (GameObject.Find ("panel2"));
+
+		rowWidth = row1 [0].GetComponent<RectTransform> ().rect.width;
+		rowX = row1 [0].GetComponent<RectTransform> ().anchoredPosition.x;
 	}
 	
 	// Update is called once per frame
@@ -35,11 +47,15 @@ public class p3_mouse : MonoBehaviour {
 				if (hit.collider != null) {
 					Debug.Log (hit.transform.tag);
 					if (hit.transform.tag == "target") {
-						if (hit.transform.name == "panel1" && currentDrag.name == "p1") {
+						if (hit.transform.name.Contains("panel1") && currentDrag.name.Contains("p1")) {
 							isPlaced = true;
+							Destroy (currentDrag);
+							addToRow (row1);
 						} 
-						if (hit.transform.name == "panel2" && currentDrag.name == "p2") {
+						if (hit.transform.name.Contains("panel2") && currentDrag.name.Contains("p2")) {
 							isPlaced = true;
+							Destroy (currentDrag);
+							addToRow (row2);
 						}
 					}
 				}
@@ -53,6 +69,18 @@ public class p3_mouse : MonoBehaviour {
 
 		if (currentDrag != null) {
 			currentDrag.transform.position = Input.mousePosition;
+		}
+	}
+
+	void addToRow(List<GameObject> row){
+		GameObject r = Instantiate (row [0].transform.gameObject, row [0].transform.parent);
+		row.Add (r);
+		float w = rowWidth / row.Count;
+		for (int i = 0; i < row.Count; i++) {
+			row [i].GetComponent<RectTransform> ().SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, w*0.95f);
+			Vector2 pos = row [i].GetComponent<RectTransform> ().anchoredPosition;
+			row [i].GetComponent<RectTransform> ().anchoredPosition = new Vector2 (rowX+w*i, pos.y);
+			Debug.Log (row [i].GetComponent<RectTransform> ().rect.width+","+(rowX+w*i));
 		}
 	}
 }
