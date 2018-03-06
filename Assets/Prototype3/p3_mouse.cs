@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class p3_mouse : MonoBehaviour {
 
@@ -30,6 +31,10 @@ public class p3_mouse : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.R)) {
+			SceneManager.LoadScene ("prototype3");
+		}
+
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit2D hit = Physics2D.Raycast (Input.mousePosition, Vector2.zero);
 			if (hit.collider != null) {
