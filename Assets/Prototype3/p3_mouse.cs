@@ -17,6 +17,12 @@ public class p3_mouse : MonoBehaviour {
 	float rowWidth;
 	float rowX;
 
+    int row1Count;
+    int row2Count;
+
+    public Sprite[] row1sprites;
+    public Sprite[] row2sprites;
+
 	// Use this for initialization
 	void Start () {
 		currentDrag = null;
@@ -56,11 +62,16 @@ public class p3_mouse : MonoBehaviour {
 							isPlaced = true;
 							Destroy (currentDrag);
 							addToRow (row1);
+                            row1Count++;
+                            row1[row1Count].GetComponentsInChildren<Image>()[1].sprite = row1sprites[row1Count];
 						} 
 						if (hit.transform.name.Contains("panel2") && currentDrag.name.Contains("p2")) {
 							isPlaced = true;
 							Destroy (currentDrag);
 							addToRow (row2);
+                            row2Count++;
+                            row2[row2Count].GetComponentsInChildren<Image>()[1].sprite = row2sprites[row2Count];
+                    
 						}
 					}
 				}
