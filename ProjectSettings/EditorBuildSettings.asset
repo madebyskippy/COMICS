@@ -11,3 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototype3/prototype3.unity
     guid: c6fac129feb9f41d89ff8899616dc341
+  - enabled: 1
+    path: Assets/game/start.unity
+    guid: f608efbcdd19f4644be007f77c3d45db
+  - enabled: 1
+    path: Assets/game/ch1.unity
+    guid: 880ef3795cb054cb2b89ba593d6bd567
