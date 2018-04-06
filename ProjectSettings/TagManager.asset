@@ -8,6 +8,7 @@ TagManager:
   - sub
   - draggable
   - target
+  - expanding
   layers:
   - Default
   - TransparentFX
