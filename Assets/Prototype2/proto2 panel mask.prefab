@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114233194548825600}
   - component: {fileID: 114957036126580346}
   m_Layer: 5
-  m_Name: panel mask
+  m_Name: proto2 panel mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

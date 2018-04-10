@@ -20,6 +20,14 @@ public class tool_manager : MonoBehaviour {
 		pos.z = 10f;
 		transform.position = Camera.main.ScreenToWorldPoint(pos);
 
+
+		RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+		if (hit.collider != null) {
+			currentTool = hit.collider.tag;
+		} else {
+			currentTool = "null";
+		}
+
 		if (currentTool == "gutter") {
 			img.color = Color.red;
 		} else if (currentTool == "sub") {
@@ -31,13 +39,7 @@ public class tool_manager : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D col){
-		Debug.Log (col.tag);
-		currentTool = col.tag;
-	}
-
-	void OnTriggerExit2D(Collider2D col){
-		Debug.Log (col.tag);
-		currentTool = "null";
+	public string getTool(){
+		return currentTool;
 	}
 }
