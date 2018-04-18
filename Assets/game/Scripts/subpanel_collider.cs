@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class subpanel_mask : MonoBehaviour {
-	
-	[SerializeField] Image panelImage;
+public class subpanel_collider : MonoBehaviour {
+
+	[SerializeField] Sprite img;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +16,7 @@ public class subpanel_mask : MonoBehaviour {
 		
 	}
 
-	public void setImage(Sprite s){
-		panelImage.sprite = s;
+	public Sprite getImg(){
+		return img;
 	}
 }

@@ -9,6 +9,7 @@ TagManager:
   - draggable
   - target
   - expanding
+  - pacer
   layers:
   - Default
   - TransparentFX

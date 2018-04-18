@@ -10,6 +10,7 @@ public class subpanel_maker : MonoBehaviour {
 	[SerializeField] string[] states;
 
 	[SerializeField] Canvas canvas;
+	[SerializeField] RectTransform topleftmarker;
 	[SerializeField] LineRenderer line;
 	[SerializeField] RectTransform mask;
 
@@ -20,9 +21,12 @@ public class subpanel_maker : MonoBehaviour {
 	Vector3 topleft;
 	bool isValid;
 
+	Vector2 pagetopleft;
+
 	// Use this for initialization
 	void Start () {
 		uicanvas = GameObject.Find ("ui").GetComponent<Canvas> ();
+		pagetopleft = topleftmarker.anchoredPosition;
 	}
 	
 	// Update is called once per frame
@@ -39,10 +43,13 @@ public class subpanel_maker : MonoBehaviour {
 					Vector3 apos = currentPanelMask.anchoredPosition3D;
 					apos.z = 0f;
 					currentPanelMask.anchoredPosition3D = apos;
-					currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = -1 * currentPanelMask.anchoredPosition;
+					currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = pagetopleft - currentPanelMask.anchoredPosition;
 					currentPanelLine = Instantiate (line, topleft, Quaternion.identity,canvas.transform);
 					currentPanelLine.SetPositions (new Vector3[] { topleft, topleft, topleft, topleft });
 					isValid = true;
+					if (hit.collider.name == "subpanel collider") {
+						currentPanelMask.GetComponent<subpanel_mask> ().setImage(hit.collider.GetComponent<subpanel_collider> ().getImg ());
+					}
 				}
 			}
 		}

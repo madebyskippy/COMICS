@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class tool_manager : MonoBehaviour {
 
@@ -32,10 +33,14 @@ public class tool_manager : MonoBehaviour {
 			img.color = Color.red;
 		} else if (currentTool == "sub") {
 			img.color = Color.green;
-		} else if (currentTool == "expanding") {
+		} else if (currentTool == "pacer") {
 			img.color = Color.blue;
 		} else if (currentTool == "null") {
 			img.color = Color.white;
+		}
+
+		if (Input.GetKeyDown (KeyCode.R)) {
+			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 		}
 	}
 
