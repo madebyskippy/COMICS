@@ -36,7 +36,7 @@ public class tool_manager : MonoBehaviour {
 		} else if (currentTool == "pacer") {
 			img.color = Color.blue;
 		} else if (currentTool == "null") {
-			img.color = Color.white;
+			img.color = Color.gray;
 		}
 
 		if (Input.GetKeyDown (KeyCode.R)) {
