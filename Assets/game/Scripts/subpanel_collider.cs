@@ -5,6 +5,7 @@ using UnityEngine;
 public class subpanel_collider : MonoBehaviour {
 
 	[SerializeField] Sprite img;
+	[SerializeField] string state;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +15,10 @@ public class subpanel_collider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public string getState(){
+		return state;
 	}
 
 	public Sprite getImg(){

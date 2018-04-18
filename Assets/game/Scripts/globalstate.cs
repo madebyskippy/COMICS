@@ -27,9 +27,9 @@ public class globalstate : MonoBehaviour {
 
 	//string goes like this format: pg number - panel number - state number
 	Dictionary<string, bool> states = new Dictionary<string, bool>(){
-		{"pg1-p1-s1",false},
-		{"pg1-p1-s2",false},
-		{"pg1-p1-s3",false},
+		{"pg3-p1-s1",false},
+		{"pg3-p1-s2",false},
+		{"pg3-p1-s3",false},
 	};
 
 	// Use this for initialization
@@ -44,6 +44,12 @@ public class globalstate : MonoBehaviour {
 
 	public void setState(string s, bool b){
 		if (states.ContainsKey (s)) {
+			states [s] = b;
+		}
+	}
+
+	public void addState(string s, bool b){
+		if (!states.ContainsKey (s)) {
 			states.Add (s, b);
 		}
 	}

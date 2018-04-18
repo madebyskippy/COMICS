@@ -18,6 +18,7 @@ public class subpanel_maker : MonoBehaviour {
 
 	LineRenderer currentPanelLine;
 	RectTransform currentPanelMask;
+	string currentPanelState;
 	Vector3 topleft;
 	bool isValid;
 
@@ -48,6 +49,7 @@ public class subpanel_maker : MonoBehaviour {
 					currentPanelLine.SetPositions (new Vector3[] { topleft, topleft, topleft, topleft });
 					isValid = true;
 					if (hit.collider.name == "subpanel collider") {
+						currentPanelState = hit.collider.GetComponent<subpanel_collider> ().getState();
 						currentPanelMask.GetComponent<subpanel_mask> ().setImage(hit.collider.GetComponent<subpanel_collider> ().getImg ());
 					}
 				}
@@ -92,6 +94,7 @@ public class subpanel_maker : MonoBehaviour {
 					Destroy (currentPanelMask.gameObject);
 				} else {
 					//panel was created!! woo hoo
+					globalstate.Instance.setState(currentPanelState,true);
 				}
 				currentPanelMask = null;
 				currentPanelLine = null;
