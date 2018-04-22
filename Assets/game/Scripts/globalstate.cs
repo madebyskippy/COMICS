@@ -28,6 +28,8 @@ public class globalstate : MonoBehaviour {
 	//string goes like this format: pg number - panel number - state number
 	Dictionary<string, bool> states = new Dictionary<string, bool>(){
 		{"pg1-row3-s1",true},
+		{"pg2-row2-s1",true},
+		{"pg2-row3-s1",false},
 		{"pg3-row1-s1",false},
 		{"pg3-row1-s2",false},
 		{"pg3-row1-s3",false}
