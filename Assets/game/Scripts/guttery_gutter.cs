@@ -25,7 +25,6 @@ public class guttery_gutter : MonoBehaviour {
 
 	bool isDragging = false;
 	bool isTop = false; //used for telling which diagonal end you're pulling
-	float lastMouse;
 
 	// Use this for initialization
 	void Start () {
@@ -41,19 +40,14 @@ public class guttery_gutter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (isDragging) {
-			float change = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - lastMouse;
-			lastMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-			nudgePoints (change);
-//			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-//			pos.x = Mathf.Clamp (pos.x, minPos.position.x, maxPos.position.x);
-//			transform.position = new Vector3 (pos.x, transform.position.y, transform.position.z);
+			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			pos = transform.InverseTransformPoint (pos);
+			nudgePoints (pos.x);
 		}
 	}
 
 	void OnMouseDown(){
 		if (!isDragging) {
-			//determine position...
-			lastMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
 			if (isDiagonal) {
 				getClickPosition (Camera.main.ScreenToWorldPoint (Input.mousePosition));
 			}
@@ -84,8 +78,8 @@ public class guttery_gutter : MonoBehaviour {
 		Vector3[] v = guttermesh.vertices;
 		Vector2[] pcv = guttercollider.points;
 
-		float xbot = v [0].x + c;
-		float xtop = v [3].x + c;
+		float xbot = c-gutterwidth/2;
+		float xtop = c-gutterwidth/2;
 
 		xbot = Mathf.Clamp (xbot, gutterrange.x-gutterwidth,gutterrange.y);
 		xtop = Mathf.Clamp (xtop, gutterrange.x-gutterwidth,gutterrange.y);
