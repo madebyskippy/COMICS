@@ -21,22 +21,17 @@ public class tool_manager : MonoBehaviour {
 		pos.z = 10f;
 		transform.position = Camera.main.ScreenToWorldPoint(pos);
 
+		if (Input.GetMouseButtonDown(0)){
+			RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+			if (hit.collider != null) {
+				currentTool = hit.collider.tag;
+			} else {
+				currentTool = "null";
+			}
 
-		RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-		if (hit.collider != null) {
-			currentTool = hit.collider.tag;
-		} else {
-			currentTool = "null";
-		}
-
-		if (currentTool == "gutter") {
-			img.color = Color.red;
-		} else if (currentTool == "sub") {
-			img.color = Color.green;
-		} else if (currentTool == "pacer") {
-			img.color = Color.blue;
-		} else if (currentTool == "null") {
-			img.color = Color.gray;
+			if (currentTool == "sub") {
+				currentTool = "sub-button";
+			}
 		}
 
 		if (Input.GetKeyDown (KeyCode.R)) {

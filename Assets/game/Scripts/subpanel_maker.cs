@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class subpanel_maker : MonoBehaviour {
 
 	//list of states it should control.
-	//e.g.: pg3-p1-s1
+	//e.g.: pg3-row1-s1
 	[SerializeField] string[] states;
 
 	[SerializeField] Canvas canvas;
 	[SerializeField] RectTransform topleftmarker;
 	[SerializeField] LineRenderer line;
 	[SerializeField] RectTransform mask;
+
+	[SerializeField] tool_manager toolManager;
 
 	Canvas uicanvas;
 
@@ -35,24 +37,26 @@ public class subpanel_maker : MonoBehaviour {
 	void Update () {
 		//start panel
 		if (Input.GetMouseButtonDown (0)) {
-			RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-			if (hit.collider != null) {
-				if (hit.collider.tag == "sub") {
-					topleft = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-					topleft.z = 0f;
-					currentPanelMask = Instantiate(mask, canvas.transform);
-					currentPanelMask.position = topleft;
-					Vector3 apos = currentPanelMask.anchoredPosition3D;
-					apos.z = 0f;
-					currentPanelMask.anchoredPosition3D = apos;
-					currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = pagetopleft - currentPanelMask.anchoredPosition;
+			if (toolManager.getTool () == "sub-button") {
+				RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
+				if (hit.collider != null) {
+					if (hit.collider.tag == "sub") {
+						topleft = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+						topleft.z = 0f;
+						currentPanelMask = Instantiate (mask, canvas.transform);
+						currentPanelMask.position = topleft;
+						Vector3 apos = currentPanelMask.anchoredPosition3D;
+						apos.z = 0f;
+						currentPanelMask.anchoredPosition3D = apos;
+						currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = pagetopleft - currentPanelMask.anchoredPosition;
 //					currentPanelLine = Instantiate (line, topleft, Quaternion.identity,canvas.transform);
 //					currentPanelLine.SetPositions (new Vector3[] { topleft, topleft, topleft, topleft });
-					isValid = true;
-					if (hit.collider.name == "subpanel collider") {
-						currentPanelState = hit.collider.GetComponent<subpanel_collider> ().getState();
-						currentPanelMask.GetComponent<subpanel_mask> ().setImage(hit.collider.GetComponent<subpanel_collider> ().getImg ());
-						currentPanelCollider = hit.collider.GetComponent<subpanel_collider> ();
+						isValid = true;
+						if (hit.collider.name == "subpanel collider") {
+							currentPanelState = hit.collider.GetComponent<subpanel_collider> ().getState ();
+							currentPanelMask.GetComponent<subpanel_mask> ().setImage (hit.collider.GetComponent<subpanel_collider> ().getImg ());
+							currentPanelCollider = hit.collider.GetComponent<subpanel_collider> ();
+						}
 					}
 				}
 			}

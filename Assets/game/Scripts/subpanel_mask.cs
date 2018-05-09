@@ -22,8 +22,6 @@ public class subpanel_mask : MonoBehaviour  {
 
 	void OnMouseDown(){
 		globalstate.Instance.setState (state, false);
-		Debug.Log (state);
-		Debug.Log ("deleting "+globalstate.Instance.getState(state));
 		areaCollider.setColliderState (true);
 //		Destroy (this.gameObject);
 	}

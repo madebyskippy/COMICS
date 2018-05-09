@@ -11,6 +11,7 @@ TagManager:
   - expanding
   - pacer
   - gutter-target
+  - sub-button
   layers:
   - Default
   - TransparentFX
