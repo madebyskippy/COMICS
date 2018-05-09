@@ -15,8 +15,16 @@ public class guttery_gutter : MonoBehaviour {
 	[SerializeField] Transform minPos;
 	[SerializeField] Transform maxPos;
 
+	[Space(20)]
+	[SerializeField] Material activeColor;
+	Material inactiveColor;
+
+	[Space(20)]
+	[SerializeField] guttery_button button;
+
 	int[] meshtopoly = new int[]{3,1,2,0}; //poly order is top left, top right, bot right, bot left... mesh order is weird
 
+	MeshRenderer mr;
 	float gutterwidth;
 	Mesh guttermesh;
 	PolygonCollider2D guttercollider;
@@ -26,8 +34,15 @@ public class guttery_gutter : MonoBehaviour {
 	bool isDragging = false;
 	bool isTop = false; //used for telling which diagonal end you're pulling
 
+	tool_manager tm;
+
+	bool isActive;
+
 	// Use this for initialization
 	void Start () {
+		tm = GameObject.FindObjectOfType<tool_manager> ();
+		mr = GetComponent<MeshRenderer> ();
+		inactiveColor = mr.material;
 		guttermesh = transform.GetComponent<MeshFilter> ().mesh;
 		guttercollider = GetComponent<PolygonCollider2D> ();
 		Vector3[] v = guttermesh.vertices;
@@ -43,16 +58,21 @@ public class guttery_gutter : MonoBehaviour {
 			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			pos = transform.InverseTransformPoint (pos);
 			nudgePoints (pos.x);
+
+			Vector3 mousep = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			button.transform.position = new Vector3 (mousep.x, button.transform.position.y, button.transform.position.z);
 		}
 	}
 
 	void OnMouseDown(){
-		if (!isDragging) {
-			if (isDiagonal) {
-				getClickPosition (Camera.main.ScreenToWorldPoint (Input.mousePosition));
+		if (isActive) {
+			if (!isDragging) {
+				if (isDiagonal) {
+					getClickPosition (Camera.main.ScreenToWorldPoint (Input.mousePosition));
+				}
 			}
+			isDragging = true;
 		}
-		isDragging = true;
 
 	}void OnMouseUp(){
 		isDragging = false;
@@ -122,5 +142,14 @@ public class guttery_gutter : MonoBehaviour {
 
 		guttermesh.vertices = v;
 		guttercollider.points = pcv;
+	}
+
+	public void setActive(bool b){
+		isActive = b;
+		if (isActive) {
+			mr.material = activeColor;
+		} else {
+			mr.material = inactiveColor;
+		}
 	}
 }

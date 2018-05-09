@@ -12,6 +12,7 @@ TagManager:
   - pacer
   - gutter-target
   - sub-button
+  - gutter-button
   layers:
   - Default
   - TransparentFX

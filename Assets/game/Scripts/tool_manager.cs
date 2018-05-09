@@ -8,6 +8,7 @@ public class tool_manager : MonoBehaviour {
 
 	string currentTool;
 	Image img;
+	string activeRow;
 
 	// Use this for initialization
 	void Start () {
@@ -23,14 +24,25 @@ public class tool_manager : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(0)){
 			RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+			string newTool;
 			if (hit.collider != null) {
-				currentTool = hit.collider.tag;
+				newTool = hit.collider.tag;
 			} else {
-				currentTool = "null";
+				newTool = "null";
+				Debug.Log ("null");
 			}
 
-			if (currentTool == "sub") {
-				currentTool = "sub-button";
+			if (newTool == "sub" && currentTool == "sub-button") {
+				newTool = "sub-button";
+			}
+			if (newTool == "gutter" && currentTool == "gutter-button") {
+				newTool = "gutter-button";
+			}
+
+			currentTool = newTool;
+
+			if (currentTool == "sub-button" || currentTool == "gutter-button"){
+				activeRow = hit.collider.name.Substring (hit.collider.name.Length - 1, 1);
 			}
 		}
 
@@ -41,5 +53,9 @@ public class tool_manager : MonoBehaviour {
 
 	public string getTool(){
 		return currentTool;
+	}
+
+	public string getActiveRow(){
+		return activeRow;
 	}
 }
