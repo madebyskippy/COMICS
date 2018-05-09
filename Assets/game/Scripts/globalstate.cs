@@ -54,6 +54,7 @@ public class globalstate : MonoBehaviour {
 	public void setState(string s, bool b){
 		if (states.ContainsKey (s)) {
 			states [s] = b;
+			Debug.Log (s + " " + b);
 		}
 	}
 

@@ -31,7 +31,7 @@ public class component_switch : MonoBehaviour {
 	void Update () {
 		bool s = checkState ();
 		component.SetActive (s);
-		if (stateTrigger != "")
+		if (stateTrigger != "" && globalstate.Instance.getState(stateTrigger)!=s)
 			globalstate.Instance.setState (stateTrigger,s);
 	}
 
