@@ -94,6 +94,7 @@ public class subpanel_maker : MonoBehaviour {
 					Destroy (currentPanelMask.gameObject);
 				} else {
 					//panel was created!! woo hoo
+					currentPanelMask.GetComponent<subpanel_mask>().setCollider();
 					globalstate.Instance.setState(currentPanelState,true);
 				}
 				currentPanelMask = null;
