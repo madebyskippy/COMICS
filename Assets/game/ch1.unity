@@ -1324,7 +1324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &438884140
 Transform:
   m_ObjectHideFlags: 0
@@ -1333,8 +1333,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 438884139}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -296, z: -3.7823498}
-  m_LocalScale: {x: 14.999739, y: 290.0003, z: 0}
+  m_LocalPosition: {x: 1, y: -276, z: -3.7823498}
+  m_LocalScale: {x: 14.999739, y: 329, z: 0}
   m_Children: []
   m_Father: {fileID: 1769334871}
   m_RootOrder: 21
@@ -1356,8 +1356,8 @@ MonoBehaviour:
   stateRightSlant: pg3-row3-s3
   minPos: {fileID: 206950132}
   maxPos: {fileID: 1726721384}
-  activeColor: {fileID: 0}
-  button: {fileID: 0}
+  activeColor: {fileID: 2100000, guid: c919471cb7bf44c5d9261e710c07363b, type: 2}
+  button: {fileID: 1595888588}
 --- !u!60 &438884142
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2246,7 +2246,7 @@ RectTransform:
   m_LocalScale: {x: 1.0001625, y: 1.0001625, z: 1.0001625}
   m_Children: []
   m_Father: {fileID: 1769334871}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3545,7 +3545,7 @@ Prefab:
     - target: {fileID: 224313666863515724, guid: aad6cf232bfa94466bf8ef494ef82c5f,
         type: 2}
       propertyPath: m_RootOrder
-      value: 27
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 224313666863515724, guid: aad6cf232bfa94466bf8ef494ef82c5f,
         type: 2}
@@ -4161,7 +4161,7 @@ RectTransform:
   - {fileID: 206950132}
   - {fileID: 1726721384}
   m_Father: {fileID: 1769334871}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5174,7 +5174,7 @@ RectTransform:
   m_LocalScale: {x: 1.0001625, y: 1.0001625, z: 1.0001625}
   m_Children: []
   m_Father: {fileID: 1769334871}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5476,6 +5476,114 @@ MonoBehaviour:
   rangeFalse: {x: 0, y: 0}
   falseStates:
   - pg4-row3-s2
+--- !u!1 &1595888586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1595888587}
+  - component: {fileID: 1595888591}
+  - component: {fileID: 1595888590}
+  - component: {fileID: 1595888589}
+  - component: {fileID: 1595888588}
+  m_Layer: 0
+  m_Name: gutter-button row 3
+  m_TagString: gutter-button
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1595888587
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1595888586}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -6.0001106}
+  m_LocalScale: {x: 1.0001625, y: 1.0001625, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1769334871}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.279602, y: -136}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1595888588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1595888586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc72dfc7cf454d20b11bf17be1d1881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gutter: {fileID: 438884141}
+  row: 3
+--- !u!61 &1595888589
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1595888586}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50}
+  m_EdgeRadius: 0
+--- !u!114 &1595888590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1595888586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.9191176, b: 0.9191176, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1595888591
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1595888586}
 --- !u!1 &1632554137
 GameObject:
   m_ObjectHideFlags: 0
@@ -5486,7 +5594,7 @@ GameObject:
   - component: {fileID: 1632554138}
   - component: {fileID: 1632554139}
   m_Layer: 0
-  m_Name: switch
+  m_Name: switch for gutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5549,7 +5657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1663215103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5882,7 +5990,7 @@ RectTransform:
   m_LocalScale: {x: 1.0001625, y: 1.0001625, z: 1.0001625}
   m_Children: []
   m_Father: {fileID: 1769334871}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6037,7 +6145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1769334868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6127,12 +6235,14 @@ RectTransform:
   - {fileID: 1691657527}
   - {fileID: 1632554138}
   - {fileID: 438884140}
+  - {fileID: 1993666450}
   - {fileID: 1188431363}
   - {fileID: 1985276219}
   - {fileID: 1490626219}
   - {fileID: 659825127}
   - {fileID: 1702948315}
   - {fileID: 1033872769}
+  - {fileID: 1595888587}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7141,7 +7251,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1769334871}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7172,6 +7282,62 @@ MonoBehaviour:
   - pg3-row1-s1
   - pg3-row1-s2
   - pg3-row1-s3
+--- !u!1 &1993666449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1993666450}
+  - component: {fileID: 1993666451}
+  m_Layer: 0
+  m_Name: switch for gutter button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1993666450
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1993666449}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0001625, y: 1.0001625, z: 1.0001625}
+  m_Children: []
+  m_Father: {fileID: 1769334871}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1993666451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1993666449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7390f49ced94744c6a54ae973819802c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component: {fileID: 1595888586}
+  stateTrigger: pg3-row3-s1
+  hasRangeTrue: 1
+  rangeTrue: {x: 2, y: 3}
+  trueStates:
+  - pg3-row1-s1
+  - pg3-row1-s2
+  - pg3-row1-s3
+  hasRangeFalse: 0
+  rangeFalse: {x: 0, y: 0}
+  falseStates: []
 --- !u!1 &2017548895
 GameObject:
   m_ObjectHideFlags: 0
