@@ -33,12 +33,22 @@ public class button_animations : MonoBehaviour {
             case "sub-button":
                 SubButtonActive();
                 break;
+            case "gutter":
+                GutterButtonActive();
+                break;
         }
 	}
 
     void SubButtonActive(){
         if (!enterOnce)
         {
+            enterOnce = true;
+            anim.SetBool("enteridle", false);
+            anim.SetBool("enteractive", true);
+        }
+    }
+    void GutterButtonActive(){
+        if(!enterOnce){
             enterOnce = true;
             anim.SetBool("enteridle", false);
             anim.SetBool("enteractive", true);
