@@ -9,7 +9,7 @@ public class button_animations : MonoBehaviour {
     /*
      * sub-button - animates while active
      * pacer - click it and animates once
-     * gutter - animates while active
+     * gutter-button - animates while active
      * */
 
     Animator anim;
@@ -24,7 +24,7 @@ public class button_animations : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        switch(toolManager.getTool()){
+       /* switch(toolManager.getTool()){
             case "null":
                 enterOnce = false;
                 anim.SetBool("enteridle", true);
@@ -33,9 +33,21 @@ public class button_animations : MonoBehaviour {
             case "sub-button":
                 SubButtonActive();
                 break;
-            case "gutter":
+            case "gutter-button":
                 GutterButtonActive();
                 break;
+        }*/
+        if(tag == toolManager.getTool()){
+            if (!enterOnce)
+            {
+                enterOnce = true;
+                anim.SetBool("enteridle", false);
+                anim.SetBool("enteractive", true);
+            }
+        } else{
+            enterOnce = false;
+            anim.SetBool("enteridle", true);
+            anim.SetBool("enteractive", false);
         }
 	}
 
