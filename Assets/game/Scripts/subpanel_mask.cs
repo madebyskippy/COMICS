@@ -23,7 +23,7 @@ public class subpanel_mask : MonoBehaviour  {
 	void OnMouseDown(){
 		globalstate.Instance.setState (state, false);
 		areaCollider.setColliderState (true);
-//		Destroy (this.gameObject);
+		Destroy (this.gameObject);
 	}
 
 	public void setCollider(){
