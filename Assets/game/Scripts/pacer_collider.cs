@@ -13,16 +13,11 @@ public class pacer_collider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
-			RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
-			if (hit.collider != null) {
-//				if (hit.collider.tag == "pacer") {
-				if (hit.collider.gameObject == this.gameObject){	
-					bool s = globalstate.Instance.getState (state);
-					globalstate.Instance.setState (state, !s);
-				}
-			}
-		}
+	}
+
+	void OnMouseDown(){	
+		bool s = globalstate.Instance.getState (state);
+		globalstate.Instance.setState (state, !s);
 	}
 
 	public string getState(){

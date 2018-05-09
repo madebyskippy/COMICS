@@ -24,6 +24,7 @@ public class guttery_gutter : MonoBehaviour {
 	Vector2 gutterrange;
 
 	bool isDragging = false;
+	bool isTop = false; //used for telling which diagonal end you're pulling
 	float lastMouse;
 
 	// Use this for initialization
@@ -53,12 +54,30 @@ public class guttery_gutter : MonoBehaviour {
 		if (!isDragging) {
 			//determine position...
 			lastMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-
+			if (isDiagonal) {
+				getClickPosition (Camera.main.ScreenToWorldPoint (Input.mousePosition));
+			}
 		}
 		isDragging = true;
 
 	}void OnMouseUp(){
 		isDragging = false;
+	}
+
+	void getClickPosition(Vector3 mouse){
+		Vector3 top = transform.TransformPoint (transform.GetComponent<MeshFilter> ().mesh.vertices [3]);
+		Vector3 bot = transform.TransformPoint (transform.GetComponent<MeshFilter> ().mesh.vertices [0]);
+		//		Debug.Log (Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y));
+		float placement = Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y);
+		if (placement < 0.25f) {
+			//top
+			isTop = true;
+		} else if (placement < 0.75f) {
+			//mid
+		} else {
+			//bot
+			isTop = false;
+		}
 	}
 
 	void nudgePoints(float c){
@@ -71,6 +90,23 @@ public class guttery_gutter : MonoBehaviour {
 		xbot = Mathf.Clamp (xbot, gutterrange.x-gutterwidth,gutterrange.y);
 		xtop = Mathf.Clamp (xtop, gutterrange.x-gutterwidth,gutterrange.y);
 
+		//move it!!
+		if ((isDiagonal && !isTop) || !isDiagonal) {
+			v [0] = new Vector3 (xbot, v [0].y, v [0].z);
+			pcv [meshtopoly [0]] = new Vector2 (xbot, pcv [meshtopoly [0]].y);
+
+			v[2] = new Vector3(xbot+gutterwidth, v[2].y,v[2].z);
+			pcv [meshtopoly [2]] = new Vector2 (xbot+gutterwidth,pcv[meshtopoly[2]].y);
+		}
+
+		if ((isDiagonal && isTop) || !isDiagonal) {
+			v [1] = new Vector3 (xtop + gutterwidth, v [1].y, v [1].z);
+			pcv [meshtopoly [1]] = new Vector2 (xtop + gutterwidth, pcv [meshtopoly [1]].y);
+
+			v [3] = new Vector3 (xtop, v [3].y, v [3].z);
+			pcv [meshtopoly [3]] = new Vector2 (xtop, pcv [meshtopoly [3]].y);
+		}
+
 		if (!isDiagonal) {
 			//switch state when it hits the ends
 			if (xbot == gutterrange.x - gutterwidth || xbot == gutterrange.y) {
@@ -79,20 +115,16 @@ public class guttery_gutter : MonoBehaviour {
 				globalstate.Instance.setState (stateStraight, true);
 			}
 		} else {
+			if (v [0].x > v [3].x) {
+				//bottom > top, this shape \
+				globalstate.Instance.setState (stateLeftSlant, true);
+				globalstate.Instance.setState (stateRightSlant, false);
+			} else if (v [0].x < v [3].x) {
+				//top > bottom, this shape /
+				globalstate.Instance.setState (stateRightSlant, true);
+				globalstate.Instance.setState (stateLeftSlant, false);
+			}
 		}
-
-		//move it!!
-		v[0] = new Vector3(xbot, v[0].y,v[0].z);
-		pcv [meshtopoly [0]] = new Vector2 (xbot,pcv[meshtopoly[0]].y);
-
-		v[1] = new Vector3(xtop+gutterwidth, v[1].y,v[1].z);
-		pcv [meshtopoly [1]] = new Vector2 (xtop+gutterwidth,pcv[meshtopoly[1]].y);
-
-		v[2] = new Vector3(xbot+gutterwidth, v[2].y,v[2].z);
-		pcv [meshtopoly [2]] = new Vector2 (xbot+gutterwidth,pcv[meshtopoly[2]].y);
-
-		v[3] = new Vector3(xtop, v[3].y,v[3].z);
-		pcv [meshtopoly [3]] = new Vector2 (xtop,pcv[meshtopoly[3]].y);
 
 		guttermesh.vertices = v;
 		guttercollider.points = pcv;
