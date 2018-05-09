@@ -53,6 +53,7 @@ public class guttery_gutter : MonoBehaviour {
 		if (!isDragging) {
 			//determine position...
 			lastMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+
 		}
 		isDragging = true;
 

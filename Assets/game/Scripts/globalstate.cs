@@ -32,7 +32,11 @@ public class globalstate : MonoBehaviour {
 		{"pg2-row3-s1",false},
 		{"pg3-row1-s1",false},
 		{"pg3-row1-s2",false},
-		{"pg3-row1-s3",false}
+		{"pg3-row1-s3",false},
+		{"pg3-row1-s4",false},
+		{"pg3-row3-s1",false},
+		{"pg3-row3-s2",false},
+		{"pg3-row3-s3",false}
 	};
 
 	// Use this for initialization
