@@ -16,7 +16,8 @@ public class pacer_collider : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
 			if (hit.collider != null) {
-				if (hit.collider.tag == "pacer") {
+//				if (hit.collider.tag == "pacer") {
+				if (hit.collider.gameObject == this.gameObject){	
 					bool s = globalstate.Instance.getState (state);
 					globalstate.Instance.setState (state, !s);
 				}
