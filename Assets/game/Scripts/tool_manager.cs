@@ -41,12 +41,13 @@ public class tool_manager : MonoBehaviour {
 
 			currentTool = newTool;
 
-			if (currentTool == "sub-button" || currentTool == "gutter-button"){
+			if (currentTool == "sub-button" || currentTool == "gutter-button" || currentTool == "pacer"){
 				activeRow = hit.collider.name.Substring (hit.collider.name.Length - 1, 1);
 			}
 		}
 
 		if (Input.GetKeyDown (KeyCode.R)) {
+			globalstate.Instance.reload ();
 			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 		}
 	}

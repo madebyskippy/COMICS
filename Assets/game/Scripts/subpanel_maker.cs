@@ -10,6 +10,7 @@ public class subpanel_maker : MonoBehaviour {
 	[SerializeField] string[] states;
 
 	[SerializeField] Canvas canvas;
+	[SerializeField] GameObject subpanelParent;
 	[SerializeField] RectTransform topleftmarker;
 	[SerializeField] LineRenderer line;
 	[SerializeField] RectTransform mask;
@@ -51,7 +52,7 @@ public class subpanel_maker : MonoBehaviour {
 					if (hit.collider.tag == "sub") {
 						topleft = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 						topleft.z = -2f;
-						currentPanelMask = Instantiate (mask, canvas.transform);
+						currentPanelMask = Instantiate (mask, subpanelParent.transform);
 						currentPanelMask.position = topleft;
 						Vector3 apos = currentPanelMask.anchoredPosition3D;
 						apos.z = -2f;
