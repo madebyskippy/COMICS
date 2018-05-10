@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class guttery_gutter : MonoBehaviour {
 
+	[SerializeField] Transform[] snapTransforms;
+	Vector3[] snapPos;
+
+	[Space(20)]
 	[SerializeField] string stateStraight;
 
 	[Header("only used if it's diagonal")]
@@ -50,6 +54,10 @@ public class guttery_gutter : MonoBehaviour {
 		float min = transform.InverseTransformPoint (minPos.position).x;
 		float max = transform.InverseTransformPoint (maxPos.position).x;
 		gutterrange = new Vector2 (min, max);
+		snapPos = new Vector3[snapTransforms.Length];
+		for (int i = 0; i < snapPos.Length; i++) {
+			snapPos [i] = transform.InverseTransformPoint (snapTransforms [i].position);
+		}
 	}
 	
 	// Update is called once per frame
@@ -59,8 +67,10 @@ public class guttery_gutter : MonoBehaviour {
 			pos = transform.InverseTransformPoint (pos);
 			nudgePoints (pos.x);
 
-			Vector3 mousep = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			button.transform.position = new Vector3 (mousep.x, button.transform.position.y, button.transform.position.z);
+			if (!isDiagonal || (isDiagonal && isTop)) {
+				Vector3 mousep = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+				button.transform.position = new Vector3 (mousep.x, button.transform.position.y, button.transform.position.z);
+			}
 		}
 	}
 
@@ -76,6 +86,19 @@ public class guttery_gutter : MonoBehaviour {
 
 	}void OnMouseUp(){
 		isDragging = false;
+		Vector3 closest = snapPos[0];
+		float distance = 100000000f;
+		for (int i=0; i<snapPos.Length; i++){
+			float d = Mathf.Abs(Vector2.Distance(new Vector2(snapPos[i].x,snapPos[i].y),
+				new Vector2(button.transform.position.x,button.transform.position.y)));
+			if (d < distance){
+				closest = snapPos[i];
+				distance = d;
+			}
+		}
+		nudgePoints(closest.x);
+		Vector3 pos = transform.TransformPoint(closest);
+		button.transform.position = new Vector3 (pos.x, button.transform.position.y, button.transform.position.z);
 	}
 
 	void getClickPosition(Vector3 mouse){
@@ -101,25 +124,28 @@ public class guttery_gutter : MonoBehaviour {
 		float xbot = c-gutterwidth/2;
 		float xtop = c-gutterwidth/2;
 
+		if (isDiagonal) {
+			if (isTop) {
+				xbot = v [0].x;
+			} else {
+				xtop = v [3].x;
+			}
+		}
+
 		xbot = Mathf.Clamp (xbot, gutterrange.x-gutterwidth,gutterrange.y);
 		xtop = Mathf.Clamp (xtop, gutterrange.x-gutterwidth,gutterrange.y);
 
-		//move it!!
-		if ((isDiagonal && !isTop) || !isDiagonal) {
-			v [0] = new Vector3 (xbot, v [0].y, v [0].z);
-			pcv [meshtopoly [0]] = new Vector2 (xbot, pcv [meshtopoly [0]].y);
+		v [0] = new Vector3 (xbot, v [0].y, v [0].z);
+		pcv [meshtopoly [0]] = new Vector2 (xbot, pcv [meshtopoly [0]].y);
 
-			v[2] = new Vector3(xbot+gutterwidth, v[2].y,v[2].z);
-			pcv [meshtopoly [2]] = new Vector2 (xbot+gutterwidth,pcv[meshtopoly[2]].y);
-		}
+		v[2] = new Vector3(xbot+gutterwidth, v[2].y,v[2].z);
+		pcv [meshtopoly [2]] = new Vector2 (xbot+gutterwidth,pcv[meshtopoly[2]].y);
 
-		if ((isDiagonal && isTop) || !isDiagonal) {
-			v [1] = new Vector3 (xtop + gutterwidth, v [1].y, v [1].z);
-			pcv [meshtopoly [1]] = new Vector2 (xtop + gutterwidth, pcv [meshtopoly [1]].y);
+		v [1] = new Vector3 (xtop + gutterwidth, v [1].y, v [1].z);
+		pcv [meshtopoly [1]] = new Vector2 (xtop + gutterwidth, pcv [meshtopoly [1]].y);
 
-			v [3] = new Vector3 (xtop, v [3].y, v [3].z);
-			pcv [meshtopoly [3]] = new Vector2 (xtop, pcv [meshtopoly [3]].y);
-		}
+		v [3] = new Vector3 (xtop, v [3].y, v [3].z);
+		pcv [meshtopoly [3]] = new Vector2 (xtop, pcv [meshtopoly [3]].y);
 
 		if (!isDiagonal) {
 			//switch state when it hits the ends

@@ -748,6 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0096cbefe57384fa0b7d3ef0a8f5eeaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapTransforms: []
   stateStraight: pg2-row3-s1
   isDiagonal: 0
   stateLeftSlant: 
@@ -1430,6 +1431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0096cbefe57384fa0b7d3ef0a8f5eeaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapTransforms:
+  - {fileID: 622788596}
+  - {fileID: 1899339441}
   stateStraight: 
   isDiagonal: 1
   stateLeftSlant: pg3-row3-s2
@@ -2218,6 +2222,34 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 598397263}
+--- !u!1 &622788595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 622788596}
+  m_Layer: 0
+  m_Name: snap 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &622788596
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 622788595}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: -122, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1188431363}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &626034527
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,6 +2437,11 @@ Prefab:
       propertyPath: gutter
       value: 
       objectReference: {fileID: 438884141}
+    - target: {fileID: 114101086298753776, guid: cbc39f27af0c04574b0c0efef1945b70,
+        type: 2}
+      propertyPath: row
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbc39f27af0c04574b0c0efef1945b70, type: 2}
   m_IsPrefabParent: 0
@@ -3626,6 +3663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0096cbefe57384fa0b7d3ef0a8f5eeaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapTransforms: []
   stateStraight: pg2-row2-s1
   isDiagonal: 0
   stateLeftSlant: 
@@ -4469,6 +4507,8 @@ RectTransform:
   m_Children:
   - {fileID: 206950132}
   - {fileID: 1726721384}
+  - {fileID: 622788596}
+  - {fileID: 1899339441}
   m_Father: {fileID: 1769334871}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6537,6 +6577,34 @@ MonoBehaviour:
   - pg3-row3-s1
   - pg3-row3-s2
   - pg3-row3-s3
+--- !u!1 &1899339440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1899339441}
+  m_Layer: 0
+  m_Name: snap 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1899339441
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1899339440}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -107, y: -121.999985, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1188431363}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1908598288
 GameObject:
   m_ObjectHideFlags: 0

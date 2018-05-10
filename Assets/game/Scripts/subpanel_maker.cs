@@ -49,7 +49,6 @@ public class subpanel_maker : MonoBehaviour {
 				RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
 				if (hit.collider != null) {
 					if (hit.collider.tag == "sub") {
-						Debug.Log ("making new panel");
 						topleft = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 						topleft.z = -2f;
 						currentPanelMask = Instantiate (mask, canvas.transform);
