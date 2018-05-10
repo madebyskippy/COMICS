@@ -2328,15 +2328,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1206398894753000, guid: cbc39f27af0c04574b0c0efef1945b70, type: 2}
+      propertyPath: m_Name
+      value: gutter-button 3
+      objectReference: {fileID: 0}
     - target: {fileID: 114101086298753776, guid: cbc39f27af0c04574b0c0efef1945b70,
         type: 2}
       propertyPath: gutter
       value: 
       objectReference: {fileID: 438884141}
-    - target: {fileID: 1206398894753000, guid: cbc39f27af0c04574b0c0efef1945b70, type: 2}
-      propertyPath: m_Name
-      value: gutter-button 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbc39f27af0c04574b0c0efef1945b70, type: 2}
   m_IsPrefabParent: 0
@@ -2446,11 +2446,6 @@ Prefab:
       propertyPath: gutter
       value: 
       objectReference: {fileID: 900177442}
-    - target: {fileID: 114101086298753776, guid: cbc39f27af0c04574b0c0efef1945b70,
-        type: 2}
-      propertyPath: row
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbc39f27af0c04574b0c0efef1945b70, type: 2}
   m_IsPrefabParent: 0
@@ -5703,7 +5698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1663215103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6191,7 +6186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1769334868
 MonoBehaviour:
   m_ObjectHideFlags: 0
