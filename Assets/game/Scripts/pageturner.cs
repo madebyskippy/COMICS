@@ -6,30 +6,81 @@ using UnityEngine.UI;
 public class pageturner : MonoBehaviour {
 
 	[SerializeField] GameObject[] pages;
-	[SerializeField] Button[] buttons;
+	[SerializeField] Button[] pageButtons;
+
+	[SerializeField] Image[] buttonsOnPage1;
+	[SerializeField] Image[] buttonsOnPage2;
+	[SerializeField] Image[] buttonsOnPage3;
+	[SerializeField] Image[] buttonsOnPage4;
+
+	[SerializeField] GameObject mouse;
+	[SerializeField] GameObject pageLeft;
+	[SerializeField] GameObject pageRight;
+
+	int activePage;
+	List<Image[]> buttonsOnPages = new List<Image[]> ();
+	bool mouseOnPage;
 
 	// Use this for initialization
 	void Start () {
 		allDeactivate ();
 		pages [0].SetActive (true);
-        buttons[0].interactable = false;
+		pageButtons[0].interactable = false;
+		activePage = 0;
+		buttonsOnPages.Add (buttonsOnPage1);
+		buttonsOnPages.Add (buttonsOnPage2);
+		buttonsOnPages.Add (buttonsOnPage3);
+		buttonsOnPages.Add (buttonsOnPage4);
+		hideAllButtons ();
+		mouseOnPage = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		bool mop;
+		if (mouse.transform.position.x > pageLeft.transform.position.x &&
+		    mouse.transform.position.x < pageRight.transform.position.x) {
+			mop = true;
+		} else {
+			mop = false;
+		}
+		if (mouseOnPage != mop) {
+			if (mop) {
+				showButtons ();
+			} else {
+				hideAllButtons ();
+			}
+		}
+		mouseOnPage = mop;
 	}
 
 	void allDeactivate(){
 		for (int i = 0; i < pages.Length; i++) {
 			pages [i].SetActive (false);
-			buttons [i].interactable = true;
+			pageButtons [i].interactable = true;
 		}
 	}
 
 	public void pageturn(int p){
 		allDeactivate ();
 		pages [p].SetActive (true);
-		buttons [p].interactable = false;
+		pageButtons [p].interactable = false;
+		activePage = p;
+	}
+
+	void showButtons(){
+		Image[] active = buttonsOnPages [activePage];
+		for (int i = 0; i < active.Length; i++) {
+			active [i].color = new Color (1, 1, 1, 1);
+		}
+	}
+
+	void hideAllButtons(){
+		for (int j = 0; j < buttonsOnPages.Count; j++) {
+			Image[] active = buttonsOnPages [j];
+			for (int i = 0; i < active.Length; i++) {
+				active [i].color = new Color (1, 1, 1, 0);
+			}
+		}
 	}
 }
