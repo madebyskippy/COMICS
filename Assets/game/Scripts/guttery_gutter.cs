@@ -88,9 +88,9 @@ public class guttery_gutter : MonoBehaviour {
 		isDragging = false;
 		Vector3 closest = snapPos[0];
 		float distance = 100000000f;
+		Vector3 point = transform.InverseTransformPoint(button.transform.position);
 		for (int i=0; i<snapPos.Length; i++){
-			float d = Mathf.Abs(Vector2.Distance(new Vector2(snapPos[i].x,snapPos[i].y),
-				new Vector2(button.transform.position.x,button.transform.position.y)));
+			float d = Mathf.Abs(snapPos[i].x - point.x);
 			if (d < distance){
 				closest = snapPos[i];
 				distance = d;
