@@ -56,7 +56,7 @@ public class subpanel_maker : MonoBehaviour {
 						Vector3 apos = currentPanelMask.anchoredPosition3D;
 						apos.z = -2f;
 						currentPanelMask.anchoredPosition3D = apos;
-						currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = pagetopleft - currentPanelMask.anchoredPosition;
+//						currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = pagetopleft - currentPanelMask.anchoredPosition;
 //					currentPanelLine = Instantiate (line, topleft, Quaternion.identity,canvas.transform);
 //					currentPanelLine.SetPositions (new Vector3[] { topleft, topleft, topleft, topleft });
 						isValid = true;
