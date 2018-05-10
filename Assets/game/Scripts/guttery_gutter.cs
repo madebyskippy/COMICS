@@ -108,15 +108,16 @@ public class guttery_gutter : MonoBehaviour {
 		Vector3 bot = transform.TransformPoint (transform.GetComponent<MeshFilter> ().mesh.vertices [0]);
 		//		Debug.Log (Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y));
 		float placement = Mathf.Abs (mouse.y - top.y) / Mathf.Abs (bot.y - top.y);
-		if (placement < 0.25f) {
-			//top
-			isTop = true;
-		} else if (placement < 0.75f) {
-			//mid
-		} else {
-			//bot
-			isTop = false;
-		}
+//		if (placement < 0.5f) {
+//			//top
+//			isTop = true;
+//		} else if (placement < 0.75f) {
+//			//mid
+//		} else {
+//			//bot
+////			isTop = false;
+//		}
+		isTop = true;
 	}
 
 	void nudgePoints(float c){
@@ -136,6 +137,7 @@ public class guttery_gutter : MonoBehaviour {
 
 		xbot = Mathf.Clamp (xbot, gutterrange.x-gutterwidth,gutterrange.y);
 		xtop = Mathf.Clamp (xtop, gutterrange.x-gutterwidth,gutterrange.y);
+		xtop = Mathf.Min (xtop, xbot);
 
 		v [0] = new Vector3 (xbot, v [0].y, v [0].z);
 		pcv [meshtopoly [0]] = new Vector2 (xbot, pcv [meshtopoly [0]].y);
