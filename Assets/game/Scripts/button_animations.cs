@@ -24,20 +24,7 @@ public class button_animations : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-       /* switch(toolManager.getTool()){
-            case "null":
-                enterOnce = false;
-                anim.SetBool("enteridle", true);
-                anim.SetBool("enteractive", false);
-                break;
-            case "sub-button":
-                SubButtonActive();
-                break;
-            case "gutter-button":
-                GutterButtonActive();
-                break;
-        }*/
-        if(tag == toolManager.getTool()){
+        if(tag == toolManager.getTool() && name.Substring(name.Length - 1, 1) == toolManager.getActiveRow()){
             if (!enterOnce)
             {
                 enterOnce = true;
