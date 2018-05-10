@@ -6,7 +6,7 @@ public class component_switch : MonoBehaviour {
 
 	//just switches anything on when a state is met
 
-	[SerializeField] GameObject component;
+	[SerializeField] GameObject[] component;
 
 	[Header("state to trigger on/off with the component")]
 	[SerializeField] string stateTrigger;
@@ -30,7 +30,9 @@ public class component_switch : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		bool s = checkState ();
-		component.SetActive (s);
+		for (int i = 0; i < component.Length; i++) {
+			component [i].SetActive (s);
+		}
 		if (stateTrigger != "" && globalstate.Instance.getState(stateTrigger)!=s)
 			globalstate.Instance.setState (stateTrigger,s);
 	}

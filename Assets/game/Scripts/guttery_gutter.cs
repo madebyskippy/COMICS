@@ -69,7 +69,8 @@ public class guttery_gutter : MonoBehaviour {
 
 			if (!isDiagonal || (isDiagonal && isTop)) {
 				Vector3 mousep = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				button.transform.position = new Vector3 (mousep.x, button.transform.position.y, button.transform.position.z);
+				float x = Mathf.Clamp (mousep.x, minPos.position.x, maxPos.position.x);
+				button.transform.position = new Vector3 (x, button.transform.position.y, button.transform.position.z);
 			}
 		}
 	}
@@ -98,7 +99,8 @@ public class guttery_gutter : MonoBehaviour {
 		}
 		nudgePoints(closest.x);
 		Vector3 pos = transform.TransformPoint(closest);
-		button.transform.position = new Vector3 (pos.x, button.transform.position.y, button.transform.position.z);
+		float x = Mathf.Clamp (pos.x, minPos.position.x, maxPos.position.x);
+		button.transform.position = new Vector3 (x, button.transform.position.y, button.transform.position.z);
 	}
 
 	void getClickPosition(Vector3 mouse){
@@ -155,14 +157,19 @@ public class guttery_gutter : MonoBehaviour {
 				globalstate.Instance.setState (stateStraight, true);
 			}
 		} else {
-			if (v [0].x > v [3].x) {
+			//v[0] is bottom
+			//v[3] is top
+			if (v [0].x - v [3].x > 3f) {
 				//bottom > top, this shape \
 				globalstate.Instance.setState (stateLeftSlant, true);
 				globalstate.Instance.setState (stateRightSlant, false);
-			} else if (v [0].x < v [3].x) {
+			} else if (v [3].x - v [0].x > 3f) {
 				//top > bottom, this shape /
 				globalstate.Instance.setState (stateRightSlant, true);
 				globalstate.Instance.setState (stateLeftSlant, false);
+			} else {
+				globalstate.Instance.setState (stateLeftSlant, false);
+				globalstate.Instance.setState (stateRightSlant, false);
 			}
 		}
 
