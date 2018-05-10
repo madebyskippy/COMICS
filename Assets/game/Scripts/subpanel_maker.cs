@@ -41,6 +41,7 @@ public class subpanel_maker : MonoBehaviour {
 				RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
 				if (hit.collider != null) {
 					if (hit.collider.tag == "sub") {
+						Debug.Log ("making new panel");
 						topleft = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 						topleft.z = 0f;
 						currentPanelMask = Instantiate (mask, canvas.transform);
@@ -56,6 +57,8 @@ public class subpanel_maker : MonoBehaviour {
 							currentPanelState = hit.collider.GetComponent<subpanel_collider> ().getState ();
 							currentPanelMask.GetComponent<subpanel_mask> ().setImage (hit.collider.GetComponent<subpanel_collider> ().getImg ());
 							currentPanelCollider = hit.collider.GetComponent<subpanel_collider> ();
+						} else {
+							isValid = false;
 						}
 					}
 				}
@@ -103,7 +106,6 @@ public class subpanel_maker : MonoBehaviour {
 					Destroy (currentPanelMask.gameObject);
 				} else {
 					//panel was created!! woo hoo
-					Debug.Log(currentPanelState+" set true by subpanel maker");
 					currentPanelMask.GetComponent<subpanel_mask>().setCollider();
 					currentPanelMask.GetComponent<subpanel_mask> ().setState (currentPanelState);
 					currentPanelMask.GetComponent<subpanel_mask> ().setAreaCollider (currentPanelCollider);
