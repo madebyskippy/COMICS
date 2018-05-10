@@ -12,6 +12,7 @@ public class pageturner : MonoBehaviour {
 	void Start () {
 		allDeactivate ();
 		pages [0].SetActive (true);
+        buttons[0].interactable = false;
 	}
 	
 	// Update is called once per frame
