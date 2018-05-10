@@ -16,6 +16,8 @@ public class subpanel_maker : MonoBehaviour {
 
 	[SerializeField] tool_manager toolManager;
 
+	[SerializeField] Image activeBackground;
+
 	Canvas uicanvas;
 
 	LineRenderer currentPanelLine;
@@ -35,6 +37,12 @@ public class subpanel_maker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (toolManager.getTool () == "sub-button") {
+			activeBackground.color = new Color (195f/255f, 255f/255f, 168f/255f);
+		} else {
+			activeBackground.color = Color.white;
+		}
 		//start panel
 		if (Input.GetMouseButtonDown (0)) {
 			if (toolManager.getTool () == "sub-button") {
@@ -43,11 +51,11 @@ public class subpanel_maker : MonoBehaviour {
 					if (hit.collider.tag == "sub") {
 						Debug.Log ("making new panel");
 						topleft = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-						topleft.z = 0f;
+						topleft.z = -2f;
 						currentPanelMask = Instantiate (mask, canvas.transform);
 						currentPanelMask.position = topleft;
 						Vector3 apos = currentPanelMask.anchoredPosition3D;
-						apos.z = 0f;
+						apos.z = -2f;
 						currentPanelMask.anchoredPosition3D = apos;
 						currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = pagetopleft - currentPanelMask.anchoredPosition;
 //					currentPanelLine = Instantiate (line, topleft, Quaternion.identity,canvas.transform);
