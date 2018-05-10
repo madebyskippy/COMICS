@@ -38,20 +38,4 @@ public class button_animations : MonoBehaviour {
         }
 	}
 
-    void SubButtonActive(){
-        if (!enterOnce)
-        {
-            enterOnce = true;
-            anim.SetBool("enteridle", false);
-            anim.SetBool("enteractive", true);
-        }
-    }
-    void GutterButtonActive(){
-        if(!enterOnce){
-            enterOnce = true;
-            anim.SetBool("enteridle", false);
-            anim.SetBool("enteractive", true);
-        }
-    }
-
 }
