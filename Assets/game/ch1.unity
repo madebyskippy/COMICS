@@ -700,22 +700,22 @@ Prefab:
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Offset.y
-      value: 303.49725
+      value: 241.83072
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Size.y
-      value: 216.57904
+      value: 377.2843
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Offset.x
-      value: -249.05067
+      value: -211.6784
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Size.x
-      value: 110.306854
+      value: 185.05138
       objectReference: {fileID: 0}
     - target: {fileID: 114937388384088430, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
@@ -3279,6 +3279,12 @@ MonoBehaviour:
   rangeFalse: {x: 0, y: 0}
   falseStates:
   - pg3-row1-s2
+--- !u!114 &578748118 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114697509830972022, guid: aad6cf232bfa94466bf8ef494ef82c5f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1033872768}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &579940443
 GameObject:
   m_ObjectHideFlags: 0
@@ -6959,22 +6965,22 @@ Prefab:
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Offset.y
-      value: 279.00806
+      value: 245.37747
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Size.y
-      value: 201.27322
+      value: 358.20734
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Offset.x
-      value: 171.08481
+      value: 169.2132
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Size.x
-      value: 133.26703
+      value: 249.10144
       objectReference: {fileID: 0}
     - target: {fileID: 224671769600634794, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
@@ -7455,22 +7461,22 @@ Prefab:
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Offset.y
-      value: 373.1382
+      value: 296.54254
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Size.y
-      value: 107.90839
+      value: 261.09973
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Offset.x
-      value: -30.185287
+      value: -28.315388
       objectReference: {fileID: 0}
     - target: {fileID: 61348654320378318, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
       propertyPath: m_Size.x
-      value: 143.98099
+      value: 200.03
       objectReference: {fileID: 0}
     - target: {fileID: 224671769600634794, guid: f746c4034f22c4832809f166d72eb512,
         type: 2}
@@ -9805,7 +9811,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837733a31255748e281b09d600927dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  states: []
+  states:
+  - pg3-row1-s1
+  - pg3-row1-s2
+  - pg3-row1-s3
+  panelImages:
+  - {fileID: 21300000, guid: b6411d74311be45719c49e4179d048ca, type: 3}
+  - {fileID: 21300000, guid: b2c8ff9e13d454570843013f9b22262f, type: 3}
+  - {fileID: 21300000, guid: 14932a55684ca4ec3b5eb000b522c656, type: 3}
   canvas: {fileID: 1769334870}
   subpanelParent: {fileID: 1941576109}
   topleftmarker: {fileID: 1267918915}
@@ -9813,6 +9826,7 @@ MonoBehaviour:
   mask: {fileID: 224326421168318598, guid: d664de72ac9044158965888bbff9b8aa, type: 2}
   toolManager: {fileID: 446090113}
   activeBackground: {fileID: 326238700}
+  countdown: {fileID: 578748118}
 --- !u!114 &1912100619
 MonoBehaviour:
   m_ObjectHideFlags: 0

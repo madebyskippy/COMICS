@@ -8,6 +8,7 @@ public class subpanel_maker : MonoBehaviour {
 	//list of states it should control.
 	//e.g.: pg3-row1-s1
 	[SerializeField] string[] states;
+	[SerializeField] Sprite[] panelImages;
 
 	[SerializeField] Canvas canvas;
 	[SerializeField] GameObject subpanelParent;
@@ -18,6 +19,8 @@ public class subpanel_maker : MonoBehaviour {
 	[SerializeField] tool_manager toolManager;
 
 	[SerializeField] Image activeBackground;
+
+	[SerializeField] Text countdown;
 
 	Canvas uicanvas;
 
@@ -31,6 +34,9 @@ public class subpanel_maker : MonoBehaviour {
 	Vector2 pagetopleft;
 
 	Vector2 maxSizes = new Vector2(2f,2f);
+	int maxNumOfPanels = 3;
+	int numPanels = 0;
+	int nextPanel = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +47,9 @@ public class subpanel_maker : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		countdown.text = (maxNumOfPanels - numPanels).ToString();
+		updateNumPanels ();
+
 		if (toolManager.getTool () == "sub-button") {
 			activeBackground.color = new Color (195f/255f, 255f/255f, 168f/255f);
 		} else {
@@ -48,7 +57,7 @@ public class subpanel_maker : MonoBehaviour {
 		}
 		//start panel
 		if (Input.GetMouseButtonDown (0)) {
-			if (toolManager.getTool () == "sub-button") {
+			if (toolManager.getTool () == "sub-button" && numPanels < maxNumOfPanels) {
 				RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
 				if (hit.collider != null) {
 					if (hit.collider.tag == "sub") {
@@ -59,17 +68,16 @@ public class subpanel_maker : MonoBehaviour {
 						Vector3 apos = currentPanelMask.anchoredPosition3D;
 						apos.z = -2f;
 						currentPanelMask.anchoredPosition3D = apos;
-//						currentPanelMask.GetChild (0).GetComponent<RectTransform> ().anchoredPosition = pagetopleft - currentPanelMask.anchoredPosition;
-//					currentPanelLine = Instantiate (line, topleft, Quaternion.identity,canvas.transform);
-//					currentPanelLine.SetPositions (new Vector3[] { topleft, topleft, topleft, topleft });
 						isValid = true;
-						if (hit.collider.name == "subpanel collider") {
-							currentPanelState = hit.collider.GetComponent<subpanel_collider> ().getState ();
-							currentPanelMask.GetComponent<subpanel_mask> ().setImage (hit.collider.GetComponent<subpanel_collider> ().getImg ());
-							currentPanelCollider = hit.collider.GetComponent<subpanel_collider> ();
-						} else {
-							isValid = false;
-						}
+//						if (hit.collider.name == "subpanel collider") {
+//							currentPanelState = hit.collider.GetComponent<subpanel_collider> ().getState ();
+//							currentPanelMask.GetComponent<subpanel_mask> ().setImage (hit.collider.GetComponent<subpanel_collider> ().getImg ());
+//							currentPanelCollider = hit.collider.GetComponent<subpanel_collider> ();
+//						} else {
+//							isValid = false;
+//						}
+						currentPanelState = states[nextPanel];
+						currentPanelMask.GetComponent<subpanel_mask> ().setImage (panelImages [nextPanel]);
 					}
 				}
 			}
@@ -123,11 +131,24 @@ public class subpanel_maker : MonoBehaviour {
 					currentPanelMask.GetComponent<subpanel_mask>().setCollider();
 					currentPanelMask.GetComponent<subpanel_mask> ().setState (currentPanelState);
 					currentPanelMask.GetComponent<subpanel_mask> ().setAreaCollider (currentPanelCollider);
-					currentPanelCollider.setColliderState (false);
+//					currentPanelCollider.setColliderState (false);
 					globalstate.Instance.setState(currentPanelState,true);
 				}
 				currentPanelMask = null;
 				currentPanelLine = null;
+			}
+		}
+	}
+
+	void updateNumPanels(){
+		numPanels = 0;
+		nextPanel = 0;
+		for (int i = maxNumOfPanels-1; i >0; i--) {
+			if (globalstate.Instance.getState ("pg3-row1-s" + (i + 1).ToString ())) {
+				numPanels++;
+				Debug.Log ("pg3-row1-s" + (i + 1).ToString () + "state is true " + numPanels);
+			} else {
+				nextPanel = i;
 			}
 		}
 	}
