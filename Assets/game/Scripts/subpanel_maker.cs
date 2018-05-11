@@ -30,6 +30,8 @@ public class subpanel_maker : MonoBehaviour {
 
 	Vector2 pagetopleft;
 
+	Vector2 maxSizes = new Vector2(2f,2f);
+
 	// Use this for initialization
 	void Start () {
 		uicanvas = GameObject.Find ("ui").GetComponent<Canvas> ();
@@ -75,7 +77,20 @@ public class subpanel_maker : MonoBehaviour {
 
 		//draw panel
 		if (currentPanelMask != null) {
-			RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+			//adjust panel outline
+			Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			pos.z = 0f;
+			pos.y = Mathf.Min (pos.y, topleft.y-0.01f);
+			pos.x = Mathf.Max (pos.x, topleft.x+0.01f);
+
+			pos.y = Mathf.Max (pos.y, topleft.y - maxSizes.y);
+			pos.x = Mathf.Min (pos.x, topleft.x + maxSizes.x);
+//			currentPanelLine.SetPosition (1, new Vector3 (topleft.x, pos.y, 0f));
+//			currentPanelLine.SetPosition (2, pos);
+//			currentPanelLine.SetPosition (3, new Vector3 (pos.x, topleft.y, 0f));
+
+			RaycastHit2D hit = Physics2D.Raycast (pos, Vector2.zero);
 			if (hit.collider != null) {
 				if (hit.collider.tag != "sub") {
 					isValid = false;
@@ -85,15 +100,6 @@ public class subpanel_maker : MonoBehaviour {
 			} else {
 				isValid = false;
 			}
-
-			//adjust panel outline
-			Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			pos.z = 0f;
-			pos.y = Mathf.Min (pos.y, topleft.y-0.01f);
-			pos.x = Mathf.Max (pos.x, topleft.x+0.01f);
-//			currentPanelLine.SetPosition (1, new Vector3 (topleft.x, pos.y, 0f));
-//			currentPanelLine.SetPosition (2, pos);
-//			currentPanelLine.SetPosition (3, new Vector3 (pos.x, topleft.y, 0f));
 
 			//adjust panel mask/filling
 			Vector3 screenpos = Camera.main.WorldToScreenPoint (pos) / uicanvas.scaleFactor;
