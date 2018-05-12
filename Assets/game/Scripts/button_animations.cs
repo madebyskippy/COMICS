@@ -16,9 +16,15 @@ public class button_animations : MonoBehaviour {
     tool_manager toolManager;
     bool enterOnce;
 
+    bool started;
+
+
     bool active;
+    bool plus;
 	// Use this for initialization
 	void Start () {
+        plus = true;
+        started = false;
         enterOnce = false;
         active = false;
         anim = GetComponent<Animator>();
@@ -27,6 +33,7 @@ public class button_animations : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        started = true;
         if (tag != "pacer")
         {
             if (tag == toolManager.getTool() && name.Substring(name.Length - 1, 1) == toolManager.getActiveRow())
@@ -47,6 +54,21 @@ public class button_animations : MonoBehaviour {
         }
 	}
 
+	private void OnEnable()
+	{
+        if(tag == "pacer" && started && plus){
+            Debug.Log(name+" plus");
+            anim.SetBool("click", false);
+            anim.SetBool("enteridle", true);
+            anim.SetBool("enteractive", false);
+        } else if (tag=="pacer" && started && !plus){
+            Debug.Log(name+" not plus");
+            anim.SetBool("click", false);
+            anim.SetBool("enteridle", false);
+            anim.SetBool("enteractive", true);
+        }
+	}
+
 	private void OnMouseDown()
 	{
         /*if(tag == "pacer"){
@@ -56,13 +78,19 @@ public class button_animations : MonoBehaviour {
         {
             if (!active)
             {
+                plus = false;
                 active = true;
+                anim.SetBool("click", true);
                 anim.SetBool("enteridle", false);
                 anim.SetBool("enteractive", true);
+
             }
             else
             {
+                plus = true;
                 active = false;
+
+                anim.SetBool("click", true);
                 anim.SetBool("enteridle", true);
                 anim.SetBool("enteractive", false);
             }
