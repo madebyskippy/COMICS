@@ -21,6 +21,10 @@ public class menu_manager : MonoBehaviour {
 
             profileButton.GetComponent<Animator>().SetTrigger("pagechecked");
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            Application.Quit();
+        }
 	}
 
     public void Restart(){
