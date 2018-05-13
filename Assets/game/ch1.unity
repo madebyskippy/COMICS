@@ -2255,6 +2255,7 @@ GameObject:
   - component: {fileID: 361743434}
   - component: {fileID: 361743433}
   - component: {fileID: 361743436}
+  - component: {fileID: 361743437}
   m_Layer: 0
   m_Name: pg2_button
   m_TagString: Untagged
@@ -2379,6 +2380,23 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!95 &361743437
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 361743431}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02a1e2a28226e4315be2dae9d01772aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &386721085
 Prefab:
   m_ObjectHideFlags: 0
@@ -2564,6 +2582,7 @@ GameObject:
   - component: {fileID: 430521222}
   - component: {fileID: 430521221}
   - component: {fileID: 430521224}
+  - component: {fileID: 430521225}
   m_Layer: 0
   m_Name: pg3_button
   m_TagString: Untagged
@@ -2688,6 +2707,23 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!95 &430521225
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 430521219}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02a1e2a28226e4315be2dae9d01772aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &434569241
 GameObject:
   m_ObjectHideFlags: 0
@@ -5406,6 +5442,7 @@ GameObject:
   - component: {fileID: 949251314}
   - component: {fileID: 949251313}
   - component: {fileID: 949251316}
+  - component: {fileID: 949251317}
   m_Layer: 0
   m_Name: pg4_button
   m_TagString: Untagged
@@ -5530,6 +5567,23 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!95 &949251317
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 949251311}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02a1e2a28226e4315be2dae9d01772aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &967631194
 GameObject:
   m_ObjectHideFlags: 0
@@ -10018,6 +10072,7 @@ GameObject:
   - component: {fileID: 1911218174}
   - component: {fileID: 1911218173}
   - component: {fileID: 1911218176}
+  - component: {fileID: 1911218177}
   m_Layer: 0
   m_Name: pg1_button
   m_TagString: Untagged
@@ -10142,6 +10197,23 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!95 &1911218177
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1911218171}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02a1e2a28226e4315be2dae9d01772aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1912100613
 GameObject:
   m_ObjectHideFlags: 0
