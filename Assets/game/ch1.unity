@@ -2128,7 +2128,9 @@ MonoBehaviour:
   - pg3-row3-s1
   hasRangeFalse: 0
   rangeFalse: {x: 0, y: 0}
-  falseStates: []
+  falseStates:
+  - pg3-row3-s2
+  - pg3-row3-s3
 --- !u!1001 &360690909
 Prefab:
   m_ObjectHideFlags: 0
@@ -4253,10 +4255,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states:
-  - {fileID: 579940445}
-  - {fileID: 852633324}
-  - {fileID: 1956981035}
   - {fileID: 2115739565}
+  - {fileID: 579940445}
+  - {fileID: 1956981035}
+  - {fileID: 852633324}
   image: {fileID: 677901076}
 --- !u!1 &698773381
 GameObject:
@@ -4396,14 +4398,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states:
-  - {fileID: 759689202}
+  - {fileID: 1184104881}
   - {fileID: 1331811067}
   - {fileID: 463360241}
   - {fileID: 186380232}
   - {fileID: 28943085}
   - {fileID: 1961883139}
   - {fileID: 559350588}
-  - {fileID: 1184104881}
+  - {fileID: 759689202}
   image: {fileID: 716315789}
 --- !u!114 &716315789
 MonoBehaviour:
@@ -5193,6 +5195,7 @@ MonoBehaviour:
   rangeFalse: {x: 0, y: 0}
   falseStates:
   - pg2-row3-s1
+  - pg2-row2-s1
 --- !u!1 &864984570
 GameObject:
   m_ObjectHideFlags: 0
@@ -5242,11 +5245,12 @@ MonoBehaviour:
   hasRangeTrue: 0
   rangeTrue: {x: 1, y: 2}
   trueStates:
-  - pg3-row3-s3
+  - pg3-row3-s1
   hasRangeFalse: 0
   rangeFalse: {x: 0, y: 0}
   falseStates:
   - pg3-row3-s2
+  - pg3-row3-s3
 --- !u!1 &866526959
 GameObject:
   m_ObjectHideFlags: 0
@@ -7632,7 +7636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1349479029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8440,7 +8444,9 @@ MonoBehaviour:
   - pg3-row3-s1
   hasRangeFalse: 0
   rangeFalse: {x: 0, y: 0}
-  falseStates: []
+  falseStates:
+  - pg3-row3-s2
+  - pg3-row3-s3
 --- !u!1 &1498118931
 GameObject:
   m_ObjectHideFlags: 0
@@ -8491,6 +8497,7 @@ MonoBehaviour:
   rangeTrue: {x: 1, y: 2}
   trueStates:
   - pg3-row3-s2
+  - pg3-row3-s1
   hasRangeFalse: 0
   rangeFalse: {x: 0, y: 0}
   falseStates:
@@ -8620,8 +8627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states:
-  - {fileID: 1225556166}
   - {fileID: 1471600144}
+  - {fileID: 1225556166}
   image: {fileID: 1519530550}
 --- !u!1 &1523847591
 GameObject:
@@ -10659,8 +10666,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states:
-  - {fileID: 146186083}
   - {fileID: 1921844035}
+  - {fileID: 146186083}
   - {fileID: 56122171}
   image: {fileID: 1917028491}
 --- !u!1 &1921844033

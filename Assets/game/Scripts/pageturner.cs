@@ -23,8 +23,11 @@ public class pageturner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		for (int i = 0; i < 4; i++) {
+			pages [i].SetActive (true);
+		}
 		allDeactivate ();
-		pages [0].SetActive (true);
+		pages[0].GetComponent<RectTransform>().position = new Vector3(0,0,91);
 		pageButtons[0].interactable = false;
 		activePage = 0;
 		buttonsOnPages.Add (buttonsOnPage1);
@@ -56,16 +59,19 @@ public class pageturner : MonoBehaviour {
 
 	void allDeactivate(){
 		for (int i = 0; i < pages.Length; i++) {
-			pages [i].SetActive (false);
+//			pages [i].SetActive (false);
+			pages[i].GetComponent<RectTransform>().position = new Vector3(0,20,91);
 			pageButtons [i].interactable = true;
 		}
 	}
 
 	public void pageturn(int p){
 		allDeactivate ();
-		pages [p].SetActive (true);
+//		pages [p].SetActive (true);
+		pages[p].GetComponent<RectTransform>().position = new Vector3(0,0,91);
 		pageButtons [p].interactable = false;
 		activePage = p;
+		pageButtons [p].GetComponent<Animator> ().SetTrigger ("pagechecked");
 	}
 
 	void showButtons(){
@@ -81,6 +87,12 @@ public class pageturner : MonoBehaviour {
 			for (int i = 0; i < active.Length; i++) {
 				active [i].color = new Color (1, 1, 1, 0);
 			}
+		}
+	}
+
+	public void markUnread(int page){
+		if (activePage != page) {
+			pageButtons [page].GetComponent<Animator> ().SetTrigger ("pageupdated");
 		}
 	}
 }

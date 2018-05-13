@@ -116,7 +116,7 @@ public class subpanel_maker : MonoBehaviour {
 			currentPanelMask.SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, width);
 			currentPanelMask.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, height);
 
-			if (width < 50 || height < 50) {
+			if (width < 75 || height < 75) {
 				isValid = false;
 			}
 		}
