@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class pageturner : MonoBehaviour {
 
+    [SerializeField] GameObject coverpage;
+    [SerializeField] GameObject titleSidebar;
+
 	[SerializeField] GameObject[] pages;
 	[SerializeField] Button[] pageButtons;
 
@@ -23,13 +26,15 @@ public class pageturner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        coverpage.SetActive(true);
+        titleSidebar.SetActive(false);
 		for (int i = 0; i < 4; i++) {
 			pages [i].SetActive (true);
 		}
 		allDeactivate ();
 		pages[0].GetComponent<RectTransform>().position = new Vector3(0,0,91);
-		pageButtons[0].interactable = false;
-		activePage = 0;
+		//pageButtons[0].interactable = false;
+        activePage = 0;
 		buttonsOnPages.Add (buttonsOnPage1);
 		buttonsOnPages.Add (buttonsOnPage2);
 		buttonsOnPages.Add (buttonsOnPage3);
@@ -66,6 +71,10 @@ public class pageturner : MonoBehaviour {
 	}
 
 	public void pageturn(int p){
+        coverpage.SetActive(false);
+
+        titleSidebar.SetActive(true);
+
 		allDeactivate ();
 //		pages [p].SetActive (true);
 		pages[p].GetComponent<RectTransform>().position = new Vector3(0,0,91);

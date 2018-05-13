@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class menu_manager : MonoBehaviour {
 
@@ -24,11 +25,17 @@ public class menu_manager : MonoBehaviour {
 
     public void Restart(){
         globalstate.Instance.reload();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ReturnToGame(){
+
+        infoMenu.SetActive(false);
     }
 
     public void InfoMenu(){
