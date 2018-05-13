@@ -6,6 +6,8 @@ public class menu_manager : MonoBehaviour {
 
     public GameObject infoMenu;
     public GameObject characterMenu;
+
+    public GameObject profileButton;
 	// Use this for initialization
 	void Start () {
         infoMenu.SetActive(false);
@@ -14,7 +16,10 @@ public class menu_manager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if(characterMenu.activeSelf){
+
+            profileButton.GetComponent<Animator>().SetTrigger("pagechecked");
+        }
 	}
 
     public void Restart(){
@@ -39,10 +44,14 @@ public class menu_manager : MonoBehaviour {
         infoMenu.SetActive(false);
         if (characterMenu.activeSelf)
         {
+
+            //profileButton.GetComponent<Animator>().SetTrigger("");
             characterMenu.SetActive(false);
         }
         else
         {
+
+            profileButton.GetComponent<Animator>().SetTrigger("pagechecked");
             characterMenu.SetActive(true);
         }
     }

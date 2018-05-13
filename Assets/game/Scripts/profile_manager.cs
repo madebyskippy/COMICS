@@ -13,6 +13,9 @@ public class profile_manager : MonoBehaviour {
 
     private List<string> existingText;
 
+    [SerializeField]
+    private GameObject profileButton;
+
     /*
      *      {"pg1-row3-s1",true},
             {"pg2-row2-s1",true},
@@ -76,14 +79,14 @@ public class profile_manager : MonoBehaviour {
 
         if (globalstate.Instance.getState("pg3-row3-s2"))
         {
-            AddProfile(minContent, "Sometimes called a grumpy old man.");
+            AddProfile(minContent, "Rarely gets mad, but when he does, it's scary.");
 
             AddProfile(ivoryContent, "Has been learning to yield more.");
 
         }
         else
         {
-            DeleteProfile(minContent, "Sometimes called a grumpy old man.");
+            DeleteProfile(minContent, "Rarely gets mad, but when he does, it's scary.");
             DeleteProfile(ivoryContent, "Has been learning to yield more.");
         }
 
@@ -101,6 +104,7 @@ public class profile_manager : MonoBehaviour {
     void AddProfile(GameObject content, string txt){
         if (!existingText.Contains(txt))
         {
+            profileButton.GetComponent<Animator>().SetTrigger("pageupdated");
             GameObject info = Instantiate(profileText, content.transform);
             info.GetComponent<Text>().text = txt;
             existingText.Add(txt);
@@ -109,6 +113,8 @@ public class profile_manager : MonoBehaviour {
 
     void DeleteProfile(GameObject content, string txt){
         if(existingText.Contains(txt)){
+
+            profileButton.GetComponent<Animator>().SetTrigger("pagechecked");
             existingText.Remove(txt);
             Text[] txts = content.GetComponentsInChildren<Text>();
             for (int i = 0; i < txts.Length; ++i){

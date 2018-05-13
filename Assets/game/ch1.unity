@@ -470,6 +470,7 @@ GameObject:
   - component: {fileID: 128168260}
   - component: {fileID: 128168259}
   - component: {fileID: 128168258}
+  - component: {fileID: 128168262}
   m_Layer: 0
   m_Name: button_character
   m_TagString: Untagged
@@ -594,6 +595,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 128168256}
+--- !u!95 &128168262
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128168256}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02a1e2a28226e4315be2dae9d01772aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &132601598
 Prefab:
   m_ObjectHideFlags: 0
@@ -5049,6 +5067,7 @@ GameObject:
   - component: {fileID: 838219437}
   - component: {fileID: 838219436}
   - component: {fileID: 838219440}
+  - component: {fileID: 838219441}
   m_Layer: 0
   m_Name: ui
   m_TagString: Untagged
@@ -5157,6 +5176,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infoMenu: {fileID: 810972134}
   characterMenu: {fileID: 1176372413}
+  profileButton: {fileID: 128168256}
+--- !u!114 &838219441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838219435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe7858dea6d54eaaac72dfd2886f617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profileText: {fileID: 1373065441585700, guid: 23518c545bd05462ea883f733117abc2,
+    type: 2}
+  ivoryContent: {fileID: 261493547}
+  minContent: {fileID: 2028650370}
+  profileButton: {fileID: 128168256}
 --- !u!1 &852633322
 GameObject:
   m_ObjectHideFlags: 0
@@ -6545,7 +6581,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1176372414}
-  - component: {fileID: 1176372415}
   m_Layer: 0
   m_Name: character_profiles
   m_TagString: Untagged
@@ -6572,21 +6607,6 @@ RectTransform:
   m_AnchoredPosition: {x: -783.00006, y: -451}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1176372415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1176372413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe7858dea6d54eaaac72dfd2886f617, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profileText: {fileID: 1373065441585700, guid: 23518c545bd05462ea883f733117abc2,
-    type: 2}
-  ivoryContent: {fileID: 261493547}
-  minContent: {fileID: 2028650370}
 --- !u!1 &1180052617
 GameObject:
   m_ObjectHideFlags: 0
@@ -9236,7 +9256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1663215103
 MonoBehaviour:
   m_ObjectHideFlags: 0
