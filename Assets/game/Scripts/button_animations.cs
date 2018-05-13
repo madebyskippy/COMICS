@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 
@@ -21,8 +23,10 @@ public class button_animations : MonoBehaviour {
 
     bool active;
     bool plus;
+    bool enter;
 	// Use this for initialization
 	void Start () {
+        enter = false;
         plus = true;
         started = false;
         enterOnce = false;
@@ -52,10 +56,19 @@ public class button_animations : MonoBehaviour {
                 anim.SetBool("enteractive", false);
             }
         }
+
+        if(GetComponent<Image>().color.a > 0 && !enter){
+            enter = true;
+            AnimateEnter();
+        } else if(GetComponent<Image>().color.a < 1 && enter){
+            enter = false;
+        }
 	}
 
 	private void OnEnable()
 	{
+       // Debug.Log("what");
+
         if(tag == "pacer" && started && plus){
             Debug.Log(name+" plus");
             anim.SetBool("click", false);
@@ -68,6 +81,14 @@ public class button_animations : MonoBehaviour {
             anim.SetBool("enteractive", true);
         }
 	}
+
+    private void AnimateEnter(){
+        //GetComponent<RectTransform>().DOScale(2f, 0.5f);
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(GetComponent<RectTransform>().DOScale(2f, 0.5f));
+        sequence.Append(GetComponent<RectTransform>().transform.DOScale(0.8f, 0.5f));
+        sequence.Append(GetComponent<RectTransform>().transform.DOScale(1f, 0.2f));
+    }
 
 	private void OnMouseDown()
 	{

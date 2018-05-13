@@ -29,7 +29,6 @@ public class tool_manager : MonoBehaviour {
 				newTool = hit.collider.tag;
 			} else {
 				newTool = "null";
-				Debug.Log ("null");
 			}
 
 			if (newTool == "sub" && currentTool == "sub-button") {

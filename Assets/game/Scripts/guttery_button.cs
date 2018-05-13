@@ -24,16 +24,20 @@ public class guttery_button : MonoBehaviour {
 		if (tm.getTool () != "gutter-button") {
 			gutter.setActive (false);
 			triggerTargets (false);
-//			col.enabled = true;
-			if (row=="2")
-				Debug.Log ("collider enabled cus tool not gutter-button "+tm.getTool());
+            //			col.enabled = true;
+            if (row == "2")
+            {
+                //Debug.Log ("collider enabled cus tool not gutter-button "+tm.getTool());
+            }
 		} else {
 			if (tm.getActiveRow () != row) {
 				gutter.setActive (false);
 				triggerTargets (false);
-				//				col.enabled = true;
-				if (row == "2")
-					Debug.Log ("collider enabled cus active row not right");
+                //				col.enabled = true;
+                if (row == "2")
+                {
+                    //Debug.Log ("collider enabled cus active row not right");
+                }
 			} else {
 				gutter.setActive (true);
 				triggerTargets (true);
