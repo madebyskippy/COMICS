@@ -58,9 +58,11 @@ public class button_animations : MonoBehaviour {
         }
 
         if(GetComponent<Image>().color.a > 0 && !enter){
+            Debug.Log("hello");
             enter = true;
             AnimateEnter();
         } else if(GetComponent<Image>().color.a < 1 && enter){
+            Debug.Log("bye");
             enter = false;
         }
 	}
@@ -84,10 +86,11 @@ public class button_animations : MonoBehaviour {
 
     private void AnimateEnter(){
         //GetComponent<RectTransform>().DOScale(2f, 0.5f);
+        Debug.Log("play");
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(GetComponent<RectTransform>().DOScale(2f, 0.5f));
-        sequence.Append(GetComponent<RectTransform>().transform.DOScale(0.8f, 0.5f));
-        sequence.Append(GetComponent<RectTransform>().transform.DOScale(1f, 0.2f));
+        sequence.Append(GetComponent<RectTransform>().DOSizeDelta(new Vector2(70f, 70f), 0.1f));
+        sequence.Append(GetComponent<RectTransform>().DOSizeDelta(new Vector2(45f, 45f), 0.1f));
+        sequence.Append(GetComponent<RectTransform>().DOSizeDelta(new Vector2(50f, 50f), 0.1f));
     }
 
 	private void OnMouseDown()
