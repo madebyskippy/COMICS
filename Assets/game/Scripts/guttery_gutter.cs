@@ -140,16 +140,16 @@ public class guttery_gutter : MonoBehaviour {
 		xtop = Mathf.Min (xtop, xbot);
 
 		v [0] = new Vector3 (xbot, v [0].y, v [0].z);
-		pcv [meshtopoly [0]] = new Vector2 (xbot, pcv [meshtopoly [0]].y);
+		pcv [meshtopoly [0]] = new Vector2 (xbot-1f, pcv [meshtopoly [0]].y);
 
 		v[2] = new Vector3(xbot+gutterwidth, v[2].y,v[2].z);
-		pcv [meshtopoly [2]] = new Vector2 (xbot+gutterwidth,pcv[meshtopoly[2]].y);
+		pcv [meshtopoly [2]] = new Vector2 (xbot+gutterwidth+1f,pcv[meshtopoly[2]].y);
 
 		v [1] = new Vector3 (xtop + gutterwidth, v [1].y, v [1].z);
-		pcv [meshtopoly [1]] = new Vector2 (xtop + gutterwidth, pcv [meshtopoly [1]].y);
+		pcv [meshtopoly [1]] = new Vector2 (xtop + gutterwidth+1f, pcv [meshtopoly [1]].y);
 
 		v [3] = new Vector3 (xtop, v [3].y, v [3].z);
-		pcv [meshtopoly [3]] = new Vector2 (xtop, pcv [meshtopoly [3]].y);
+		pcv [meshtopoly [3]] = new Vector2 (xtop-1f, pcv [meshtopoly [3]].y);
 
 		if (!isDiagonal) {
 			//switch state when it hits the ends
