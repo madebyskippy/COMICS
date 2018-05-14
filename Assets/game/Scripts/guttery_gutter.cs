@@ -154,7 +154,7 @@ public class guttery_gutter : MonoBehaviour {
 		if (!isDiagonal) {
 			//switch state when it hits the ends
 //			if (xbot == gutterrange.x - gutterwidth || xbot == gutterrange.y) {
-			if (Mathf.Abs((xbot+gutterwidth/2f)-snapPos[1].x)>5f) {
+			if (Mathf.Abs((xbot+gutterwidth/2f)-snapPos[1].x)>Mathf.Abs(snapPos[0].x-snapPos[1].x)*0.5f) {
 				globalstate.Instance.setState (stateStraight, false);
 			} else {
 				globalstate.Instance.setState (stateStraight, true);
