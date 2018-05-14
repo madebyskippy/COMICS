@@ -27,7 +27,6 @@ public class panel_switcher : MonoBehaviour {
 					currentState = i;
 					image.sprite = states [i].getSprite ();
 					pt.markUnread (page);
-					Debug.Log (transform.name+" "+i);
 				}
 			}
 		}

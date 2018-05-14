@@ -143,10 +143,9 @@ public class subpanel_maker : MonoBehaviour {
 	void updateNumPanels(){
 		numPanels = 0;
 		nextPanel = 0;
-		for (int i = maxNumOfPanels-1; i >0; i--) {
+		for (int i = maxNumOfPanels-1; i >=0; i--) {
 			if (globalstate.Instance.getState ("pg3-row1-s" + (i + 1).ToString ())) {
 				numPanels++;
-				Debug.Log ("pg3-row1-s" + (i + 1).ToString () + "state is true " + numPanels);
 			} else {
 				nextPanel = i;
 			}
