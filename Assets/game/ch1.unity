@@ -4427,6 +4427,16 @@ Prefab:
       propertyPath: targets.Array.data[2]
       value: 
       objectReference: {fileID: 434569241}
+    - target: {fileID: 95283481591006286, guid: cbc39f27af0c04574b0c0efef1945b70,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114708799177893946, guid: cbc39f27af0c04574b0c0efef1945b70,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbc39f27af0c04574b0c0efef1945b70, type: 2}
   m_IsPrefabParent: 0
@@ -6556,22 +6566,6 @@ Transform:
   m_Father: {fileID: 2017548896}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1056393087 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1581805857802214, guid: aad6cf232bfa94466bf8ef494ef82c5f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1033872768}
---- !u!114 &1056393088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1056393087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e5e0a047ecb43a6b97c352962977cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1062576793
 GameObject:
   m_ObjectHideFlags: 0
@@ -9906,7 +9900,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 90, y: 272.5}
-  m_SizeDelta: {x: 123.5, y: 115.8}
+  m_SizeDelta: {x: 148.3, y: 115.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1612489348
 MonoBehaviour:
@@ -9938,7 +9932,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'MIN
 
@@ -10092,7 +10086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1663215103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10606,7 +10600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1769334868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10945,8 +10939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -79.7, y: -100.69}
-  m_SizeDelta: {x: 123.5, y: 139.38}
+  m_AnchoredPosition: {x: -83.59, y: -100.69}
+  m_SizeDelta: {x: 141.66, y: 139.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1827894211
 MonoBehaviour:
@@ -10978,7 +10972,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'IVORY
 

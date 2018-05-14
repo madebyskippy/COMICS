@@ -87,6 +87,7 @@ public class button_animations : MonoBehaviour {
         sequence.Append(GetComponent<RectTransform>().DOSizeDelta(new Vector2(70f, 70f), 0.1f));
         sequence.Append(GetComponent<RectTransform>().DOSizeDelta(new Vector2(45f, 45f), 0.1f));
         sequence.Append(GetComponent<RectTransform>().DOSizeDelta(new Vector2(50f, 50f), 0.1f));
+
     }
 
 	private void OnMouseDown()
