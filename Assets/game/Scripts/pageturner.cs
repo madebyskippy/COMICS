@@ -22,6 +22,7 @@ public class pageturner : MonoBehaviour {
 
 	int activePage;
 	List<Image[]> buttonsOnPages = new List<Image[]> ();
+	List<float[]> buttonsOnPagesAlpha = new List<float[]> ();
 	bool mouseOnPage;
 
 	// Use this for initialization
@@ -39,6 +40,12 @@ public class pageturner : MonoBehaviour {
 		buttonsOnPages.Add (buttonsOnPage2);
 		buttonsOnPages.Add (buttonsOnPage3);
 		buttonsOnPages.Add (buttonsOnPage4);
+		for (int i = 0; i < buttonsOnPages.Count; i++) {
+			buttonsOnPagesAlpha.Add (new float[buttonsOnPages [i].Length]);
+			for (int j = 0; j < buttonsOnPagesAlpha [i].Length; j++) {
+				buttonsOnPagesAlpha [i][j]= buttonsOnPages [i] [j].color.a;
+			}
+		}
 		hideAllButtons ();
 		mouseOnPage = false;
 	}
@@ -86,7 +93,7 @@ public class pageturner : MonoBehaviour {
 	void showButtons(){
 		Image[] active = buttonsOnPages [activePage];
 		for (int i = 0; i < active.Length; i++) {
-			active [i].color = new Color (1, 1, 1, 1);
+			active [i].color = new Color (1, 1, 1, buttonsOnPagesAlpha[activePage][i]);
 		}
 	}
 
