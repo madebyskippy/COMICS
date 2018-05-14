@@ -1541,8 +1541,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snapTransforms:
   - {fileID: 1055485168}
-  - {fileID: 1470233785}
   - {fileID: 1989592453}
+  - {fileID: 1470233785}
   stateStraight: pg2-row3-s1
   isDiagonal: 0
   stateLeftSlant: 
